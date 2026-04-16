@@ -83,6 +83,36 @@ Don't use Feb 2026 PDF statement cash balances - they're stale. Use user-provide
 - Client fetches prices, calculates values, renders tables
 - Auto-refreshes every 5 minutes
 
+## Entity Mapping (expanded owners)
+The original 3 owners (Dev, Shalini, Vegrow) are expanded to 5 entities for insights:
+- **Dev** — Personal Questrade (RRSP/TFSA/Cash), Ledger, Coinbase, Dev Scotia, 50% real estate
+- **Shalini** — Personal Questrade (RRSP/TFSA/Cash), Shalini Scotia, 50% real estate
+- **Vegrow** — Vegrow Questrade Cash, Vegrow BMO
+- **Blockwiz** — Blockwiz Scotia, Blockwiz Wise, Blockwiz BMO, Binance (BNB/TRX)
+- **Seglitix** — Seglitix BMO
+
+## Real Estate
+- **Ireo Grand Arch** (India): 5.35 crore INR, owned by Dev & Shalini (50/50)
+- **Garvin Mews** (Canada): $1.1M CAD, owned by Dev & Shalini (50/50)
+- INR/CAD rate fetched from Yahoo Finance (CADINR=X)
+
+## Country Mapping
+- India: ZID.TO + Ireo Grand Arch
+- USA: GOOG, META, MSFT, NFLX, TSLA, VFV.TO
+- Canada: CASH.TO, Garvin Mews, bank cash
+- Global: All crypto
+
+## Insights Page (/insights)
+8 visual analysis sections using Recharts:
+1. Asset Allocation (donut chart)
+2. Owner/Entity Comparison (stacked bar)
+3. Concentration Risk (pie with warnings)
+4. Currency Exposure (USD/CAD/INR)
+5. Crypto vs Traditional (what-if scenarios)
+6. Idle Cash Analysis (opportunity cost)
+7. Net Worth Trend (placeholder, needs monthly snapshots)
+8. Country Exposure (bar + cards)
+
 ## How to Update Holdings
 1. Edit `data/holdings.json`
 2. Push to GitHub
