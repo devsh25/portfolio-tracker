@@ -143,7 +143,22 @@ export function getConcentrationRisk(
     .slice(0, 12);
 }
 
-// ── 4. Currency Exposure ──
+// ── 4. Currency Exposure (underlying economic exposure) ──
+// Maps ticker to the currency of the underlying asset (not the ticker's quoted currency).
+// VFV.TO is quoted in CAD but holds US stocks → USD exposure.
+// ZID.TO is quoted in CAD but holds Indian stocks → INR exposure.
+// CASH.TO is Canadian high-interest savings → CAD exposure.
+function underlyingCurrency(asset: string, holdings: HoldingsData): "USD" | "CAD" | "INR" {
+  const country = holdings.countryMapping[asset];
+  if (country === "India") return "INR";
+  if (country === "Canada") return "CAD";
+  if (country === "USA") return "USD";
+  if (country === "Global") return "USD"; // crypto
+  // Fallback to quoted currency
+  const meta = holdings.tickerMeta[asset];
+  return meta?.currency === "CAD" ? "CAD" : "USD";
+}
+
 export function getCurrencyExposure(
   summaries: OwnerSummary[], holdings: HoldingsData, fxRate: number, inrRate: number
 ): ChartSlice[] {
@@ -152,8 +167,9 @@ export function getCurrencyExposure(
   for (const summary of summaries) {
     for (const row of summary.rows) {
       if (row.accountType === "questrade") {
-        const meta = holdings.tickerMeta[row.asset];
-        if (meta?.currency === "CAD") cad += row.valueCAD;
+        const cur = underlyingCurrency(row.asset, holdings);
+        if (cur === "CAD") cad += row.valueCAD;
+        else if (cur === "INR") inr += row.valueCAD;
         else usd += row.valueCAD;
       } else if (row.accountType === "crypto") {
         usd += row.valueCAD; // crypto is USD-denominated
