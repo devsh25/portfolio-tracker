@@ -116,5 +116,53 @@
     "Seglitix BMO": "CAD",
     "Blockwiz BMO": "CAD",
     "Vegrow BMO": "CAD"
+  },
+  "realEstate": {
+    "Ireo Grand Arch": {
+      "value": 53500000,
+      "currency": "INR",
+      "country": "India",
+      "owners": ["Dev", "Shalini"]
+    },
+    "Garvin Mews": {
+      "value": 1100000,
+      "currency": "CAD",
+      "country": "Canada",
+      "owners": ["Dev", "Shalini"]
+    }
+  },
+  "entityMapping": {
+    "Blockwiz Wise": "Blockwiz",
+    "Blockwiz Scotia": "Blockwiz",
+    "Blockwiz BMO": "Blockwiz",
+    "Seglitix BMO": "Seglitix",
+    "Vegrow BMO": "Vegrow",
+    "Dev Scotia": "Dev",
+    "Shalini Scotia": "Shalini",
+    "Questrade": "same"
+  },
+  "cryptoEntityMapping": {
+    "Ledger": "Dev",
+    "Coinbase": "Dev",
+    "Binance": "Blockwiz"
+  },
+  "countryMapping": {
+    "ZID.TO": "India",
+    "GOOG": "USA",
+    "META": "USA",
+    "MSFT": "USA",
+    "NFLX": "USA",
+    "TSLA": "USA",
+    "VFV.TO": "USA",
+    "CASH.TO": "Canada",
+    "BTC": "Global",
+    "ETH": "Global",
+    "SOL": "Global",
+    "XRP": "Global",
+    "BNB": "Global",
+    "LTC": "Global",
+    "TRX": "Global",
+    "MANA": "Global",
+    "SAND": "Global"
   }
 }

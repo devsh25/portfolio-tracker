@@ -23,7 +23,8 @@ export async function GET() {
   }
 
   const tickers = Object.values(holdingsData.tickerMeta).map((m) => m.yahoo);
-  tickers.push("CAD=X"); // FX rate
+  tickers.push("CAD=X"); // USD/CAD FX rate
+  tickers.push("CADINR=X"); // CAD/INR FX rate
 
   const prices: Record<string, { price: number; currency: "USD" | "CAD" }> = {};
   const yahooToLocal: Record<string, string> = {};
@@ -46,6 +47,8 @@ export async function GET() {
 
         if (yahooTicker === "CAD=X") {
           prices["CAD=X"] = { price, currency: "CAD" };
+        } else if (yahooTicker === "CADINR=X") {
+          prices["CADINR=X"] = { price, currency: "CAD" };
         } else {
           const localTicker = yahooToLocal[yahooTicker];
           if (localTicker) {
