@@ -142,9 +142,9 @@
     "Questrade": "same"
   },
   "cryptoEntityMapping": {
-    "Ledger": "Dev",
-    "Coinbase": "Dev",
-    "Binance": "Blockwiz"
+    "Ledger": ["Dev", "Shalini"],
+    "Coinbase": ["Dev", "Shalini"],
+    "Binance": ["Blockwiz"]
   },
   "countryMapping": {
     "ZID.TO": "India",

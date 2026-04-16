@@ -58,24 +58,33 @@ export function getEntityTotals(
 
   for (const summary of summaries) {
     for (const row of summary.rows) {
-      let entity = summary.owner;
+      const cat = row.accountType === "questrade" ? "Questrade" : row.accountType === "crypto" ? "Crypto" : "Cash";
 
+      // Crypto entity mapping - supports single owner OR array for splits
+      if (row.accountType === "crypto") {
+        const mapped = holdings.cryptoEntityMapping[row.account];
+        const owners = Array.isArray(mapped) ? mapped : mapped ? [mapped] : [summary.owner];
+        const shareCAD = row.valueCAD / owners.length;
+        const shareUSD = row.valueUSD / owners.length;
+        for (const o of owners) {
+          ensure(o);
+          entities[o].totalCAD += shareCAD;
+          entities[o].totalUSD += shareUSD;
+          entities[o].breakdown[cat] = (entities[o].breakdown[cat] || 0) + shareCAD;
+        }
+        continue;
+      }
+
+      let entity = summary.owner;
       // Cash entity mapping
       if (row.accountType === "cash") {
         const mapped = holdings.entityMapping[row.account];
         if (mapped && mapped !== "same") entity = mapped;
       }
 
-      // Crypto entity mapping
-      if (row.accountType === "crypto") {
-        const mapped = holdings.cryptoEntityMapping[row.account];
-        if (mapped) entity = mapped;
-      }
-
       ensure(entity);
       entities[entity].totalCAD += row.valueCAD;
       entities[entity].totalUSD += row.valueUSD;
-      const cat = row.accountType === "questrade" ? "Questrade" : row.accountType === "crypto" ? "Crypto" : "Cash";
       entities[entity].breakdown[cat] = (entities[entity].breakdown[cat] || 0) + row.valueCAD;
     }
   }

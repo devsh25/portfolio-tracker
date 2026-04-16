@@ -19,7 +19,7 @@ export interface HoldingsData {
   cashCurrencies: Record<string, "USD" | "CAD">;
   realEstate: Record<string, RealEstateProperty>;
   entityMapping: Record<string, string>;
-  cryptoEntityMapping: Record<string, string>;
+  cryptoEntityMapping: Record<string, string | string[]>;
   countryMapping: Record<string, string>;
 }
 
