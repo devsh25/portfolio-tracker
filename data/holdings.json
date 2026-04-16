@@ -1,0 +1,120 @@
+{
+  "lastUpdated": "2026-04-16",
+  "notes": "Holdings verified April 16, 2026. Questrade from portfolio CSV + live screenshots. Crypto from Ledger/Coinbase/Binance wallet calculations. Bank cash from user-provided balances.",
+  "owners": {
+    "Dev": {
+      "questrade": {
+        "RRSP": {
+          "GOOG": 61.64,
+          "META": 5,
+          "MSFT": 8,
+          "NFLX": 110,
+          "TSLA": 37
+        },
+        "TFSA": {
+          "VFV.TO": 213,
+          "ZID.TO": 271
+        },
+        "Cash": {
+          "VFV.TO": 2034,
+          "MSFT": 52.03
+        }
+      },
+      "crypto": {
+        "Ledger": {
+          "BTC": 4.9485,
+          "ETH": 38.547,
+          "SOL": 84.894,
+          "XRP": 369.5,
+          "LTC": 2.62,
+          "MANA": 2222.76,
+          "SAND": 2469.47
+        },
+        "Coinbase": {
+          "BTC": 0.7158
+        },
+        "Binance": {
+          "BNB": 22.63,
+          "TRX": 35865
+        }
+      },
+      "cash": {
+        "USDC (Ledger)": 48994.46,
+        "USDT (Ledger)": 55.73,
+        "Questrade": 396,
+        "Dev Scotia": 15675,
+        "Blockwiz Scotia": 28981,
+        "Blockwiz Wise": 5508,
+        "Seglitix BMO": 13772,
+        "Blockwiz BMO": 2474
+      }
+    },
+    "Shalini": {
+      "questrade": {
+        "RRSP": {
+          "GOOG": 37.5,
+          "MSFT": 15,
+          "TSLA": 63
+        },
+        "TFSA": {
+          "VFV.TO": 293,
+          "ZID.TO": 16
+        },
+        "Cash": {
+          "VFV.TO": 576,
+          "ZID.TO": 399
+        }
+      },
+      "crypto": {},
+      "cash": {
+        "Questrade": 568,
+        "Shalini Scotia": 5305
+      }
+    },
+    "Vegrow": {
+      "questrade": {
+        "Cash": {
+          "ZID.TO": 1119,
+          "CASH.TO": 499,
+          "VFV.TO": 134
+        }
+      },
+      "crypto": {},
+      "cash": {
+        "Questrade": 188.68,
+        "Vegrow BMO": 13581
+      }
+    }
+  },
+  "tickerMeta": {
+    "GOOG": { "name": "Alphabet Inc", "currency": "USD", "yahoo": "GOOG" },
+    "META": { "name": "Meta Platforms", "currency": "USD", "yahoo": "META" },
+    "MSFT": { "name": "Microsoft Corp", "currency": "USD", "yahoo": "MSFT" },
+    "NFLX": { "name": "Netflix Inc", "currency": "USD", "yahoo": "NFLX" },
+    "TSLA": { "name": "Tesla Inc", "currency": "USD", "yahoo": "TSLA" },
+    "VFV.TO": { "name": "Vanguard S&P 500 ETF", "currency": "CAD", "yahoo": "VFV.TO" },
+    "ZID.TO": { "name": "BMO MSCI India ETF", "currency": "CAD", "yahoo": "ZID.TO" },
+    "CASH.TO": { "name": "Global X High Interest Savings ETF", "currency": "CAD", "yahoo": "CASH.TO" },
+    "BTC": { "name": "Bitcoin", "currency": "USD", "yahoo": "BTC-USD" },
+    "ETH": { "name": "Ethereum", "currency": "USD", "yahoo": "ETH-USD" },
+    "SOL": { "name": "Solana", "currency": "USD", "yahoo": "SOL-USD" },
+    "XRP": { "name": "XRP", "currency": "USD", "yahoo": "XRP-USD" },
+    "BNB": { "name": "BNB", "currency": "USD", "yahoo": "BNB-USD" },
+    "LTC": { "name": "Litecoin", "currency": "USD", "yahoo": "LTC-USD" },
+    "TRX": { "name": "TRON", "currency": "USD", "yahoo": "TRX-USD" },
+    "MANA": { "name": "Decentraland", "currency": "USD", "yahoo": "MANA-USD" },
+    "SAND": { "name": "The Sandbox", "currency": "USD", "yahoo": "SAND-USD" }
+  },
+  "cashCurrencies": {
+    "USDC (Ledger)": "USD",
+    "USDT (Ledger)": "USD",
+    "Questrade": "CAD",
+    "Dev Scotia": "CAD",
+    "Shalini Scotia": "CAD",
+    "Blockwiz Scotia": "CAD",
+    "Blockwiz Wise": "CAD",
+    "Seglitix BMO": "CAD",
+    "Blockwiz BMO": "CAD",
+    "Vegrow BMO": "CAD"
+  }
+}
