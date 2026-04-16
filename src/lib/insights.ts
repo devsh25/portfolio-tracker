@@ -241,10 +241,13 @@ export function getCountryExposure(
   for (const summary of summaries) {
     for (const row of summary.rows) {
       if (row.accountType === "cash") {
-        ensure("Canada");
-        countries["Canada"].totalCAD += row.valueCAD;
-        countries["Canada"].totalUSD += row.valueUSD;
-        countries["Canada"].assets.add(row.account);
+        // USD-denominated cash (USDC, USDT) → USA; CAD cash → Canada
+        const cashCur = holdings.cashCurrencies[row.account];
+        const country = cashCur === "USD" ? "USA" : "Canada";
+        ensure(country);
+        countries[country].totalCAD += row.valueCAD;
+        countries[country].totalUSD += row.valueUSD;
+        countries[country].assets.add(row.account);
         continue;
       }
 
