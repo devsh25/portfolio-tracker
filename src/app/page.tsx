@@ -14,6 +14,7 @@ export default function Home() {
   const [summaries, setSummaries] = useState<OwnerSummary[]>([]);
   const [entities, setEntities] = useState<EntityTotal[]>([]);
   const [categories, setCategories] = useState<CategorySummary[]>([]);
+  const [realEstateCAD, setRealEstateCAD] = useState(0);
   const [fxRate, setFxRate] = useState(1.373);
   const [lastRefresh, setLastRefresh] = useState<string>("");
   const [loading, setLoading] = useState(true);
@@ -34,10 +35,12 @@ export default function Home() {
       const sums = buildPortfolio(holdings, prices, fx);
       const cats = buildCategories(sums);
       const ents = getEntityTotals(sums, holdings, fx, inr);
+      const reCAD = getRealEstateCAD(holdings, fx, inr);
 
       setSummaries(sums);
       setEntities(ents);
       setCategories(cats);
+      setRealEstateCAD(reCAD);
       setLastRefresh(new Date().toLocaleTimeString());
       setError(null);
     } catch (e) {
@@ -56,6 +59,8 @@ export default function Home() {
 
   const grandUSD = entities.reduce((s, e) => s + e.totalUSD, 0);
   const grandCAD = entities.reduce((s, e) => s + e.totalCAD, 0);
+  const investableCAD = grandCAD - realEstateCAD;
+  const investableUSD = investableCAD / fxRate;
 
   return (
     <>
@@ -96,7 +101,13 @@ export default function Home() {
           </div>
         ) : (
           <>
-            <SummaryCards entities={entities} grandUSD={grandUSD} grandCAD={grandCAD} />
+            <SummaryCards
+              entities={entities}
+              grandUSD={grandUSD}
+              grandCAD={grandCAD}
+              investableUSD={investableUSD}
+              investableCAD={investableCAD}
+            />
             {summaries.map((s) => (
               <PortfolioTable key={s.owner} summary={s} />
             ))}
