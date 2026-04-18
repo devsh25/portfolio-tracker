@@ -18,6 +18,7 @@ import CurrencyExposure from "@/components/insights/CurrencyExposure";
 import CryptoVsTraditional from "@/components/insights/CryptoVsTraditional";
 import IdleCashAnalysis from "@/components/insights/IdleCashAnalysis";
 import NetWorthTrend from "@/components/insights/NetWorthTrend";
+import LiquidGrowth from "@/components/insights/LiquidGrowth";
 import CountryExposureChart from "@/components/insights/CountryExposure";
 
 export default function InsightsPage() {
@@ -116,6 +117,8 @@ export default function InsightsPage() {
               <div className="text-[11px] text-gray-400/80 mt-2">Real estate: {formatCAD(realEstateCAD)} CAD</div>
             </div>
           </div>
+
+          <LiquidGrowth />
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <AssetAllocation data={allocation} />
