@@ -1,1 +1,744 @@
-[]
+[
+  {
+    "timestamp": "2026-01-03T05:00:00.000Z",
+    "liquidCAD": 1904955,
+    "liquidUSD": 1388856,
+    "fxRate": 1.3716,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-01-04T05:00:00.000Z",
+    "liquidCAD": 1910554,
+    "liquidUSD": 1392938,
+    "fxRate": 1.3716,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-01-05T05:00:00.000Z",
+    "liquidCAD": 1918178,
+    "liquidUSD": 1398497,
+    "fxRate": 1.3716,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-01-06T05:00:00.000Z",
+    "liquidCAD": 1951731,
+    "liquidUSD": 1419781,
+    "fxRate": 1.3747,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-01-07T05:00:00.000Z",
+    "liquidCAD": 1959664,
+    "liquidUSD": 1422882,
+    "fxRate": 1.3772,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-01-08T05:00:00.000Z",
+    "liquidCAD": 1937982,
+    "liquidUSD": 1402760,
+    "fxRate": 1.3815,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-01-09T05:00:00.000Z",
+    "liquidCAD": 1935796,
+    "liquidUSD": 1396890,
+    "fxRate": 1.3858,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-01-10T05:00:00.000Z",
+    "liquidCAD": 1938142,
+    "liquidUSD": 1397957,
+    "fxRate": 1.3864,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-01-11T05:00:00.000Z",
+    "liquidCAD": 1937637,
+    "liquidUSD": 1397593,
+    "fxRate": 1.3864,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-01-12T05:00:00.000Z",
+    "liquidCAD": 1943216,
+    "liquidUSD": 1401617,
+    "fxRate": 1.3864,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-01-13T05:00:00.000Z",
+    "liquidCAD": 1949314,
+    "liquidUSD": 1400983,
+    "fxRate": 1.3914,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-01-14T05:00:00.000Z",
+    "liquidCAD": 1991055,
+    "liquidUSD": 1434922,
+    "fxRate": 1.3876,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-01-15T05:00:00.000Z",
+    "liquidCAD": 2001920,
+    "liquidUSD": 1441631,
+    "fxRate": 1.3886,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-01-16T05:00:00.000Z",
+    "liquidCAD": 1989105,
+    "liquidUSD": 1432598,
+    "fxRate": 1.3885,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-01-17T05:00:00.000Z",
+    "liquidCAD": 1988114,
+    "liquidUSD": 1431492,
+    "fxRate": 1.3888,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-01-18T05:00:00.000Z",
+    "liquidCAD": 1986245,
+    "liquidUSD": 1430147,
+    "fxRate": 1.3888,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-01-19T05:00:00.000Z",
+    "liquidCAD": 1971962,
+    "liquidUSD": 1419862,
+    "fxRate": 1.3888,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-01-20T05:00:00.000Z",
+    "liquidCAD": 1952099,
+    "liquidUSD": 1404448,
+    "fxRate": 1.3899,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-01-21T05:00:00.000Z",
+    "liquidCAD": 1884839,
+    "liquidUSD": 1358540,
+    "fxRate": 1.3874,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-01-22T05:00:00.000Z",
+    "liquidCAD": 1899686,
+    "liquidUSD": 1373300,
+    "fxRate": 1.3833,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-01-23T05:00:00.000Z",
+    "liquidCAD": 1904800,
+    "liquidUSD": 1375982,
+    "fxRate": 1.3843,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-01-24T05:00:00.000Z",
+    "liquidCAD": 1896982,
+    "liquidUSD": 1376211,
+    "fxRate": 1.3784,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-01-25T05:00:00.000Z",
+    "liquidCAD": 1893308,
+    "liquidUSD": 1373545,
+    "fxRate": 1.3784,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-01-26T05:00:00.000Z",
+    "liquidCAD": 1864658,
+    "liquidUSD": 1352760,
+    "fxRate": 1.3784,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-01-27T05:00:00.000Z",
+    "liquidCAD": 1880988,
+    "liquidUSD": 1372794,
+    "fxRate": 1.3702,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-01-28T05:00:00.000Z",
+    "liquidCAD": 1891109,
+    "liquidUSD": 1379163,
+    "fxRate": 1.3712,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-01-29T05:00:00.000Z",
+    "liquidCAD": 1879564,
+    "liquidUSD": 1382897,
+    "fxRate": 1.3592,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-01-30T05:00:00.000Z",
+    "liquidCAD": 1817339,
+    "liquidUSD": 1342408,
+    "fxRate": 1.3538,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-01-31T05:00:00.000Z",
+    "liquidCAD": 1809133,
+    "liquidUSD": 1340893,
+    "fxRate": 1.3492,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-02-01T05:00:00.000Z",
+    "liquidCAD": 1749456,
+    "liquidUSD": 1296662,
+    "fxRate": 1.3492,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-02-02T05:00:00.000Z",
+    "liquidCAD": 1726326,
+    "liquidUSD": 1279518,
+    "fxRate": 1.3492,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-02-03T05:00:00.000Z",
+    "liquidCAD": 1762148,
+    "liquidUSD": 1292295,
+    "fxRate": 1.3636,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-02-04T05:00:00.000Z",
+    "liquidCAD": 1724975,
+    "liquidUSD": 1261528,
+    "fxRate": 1.3674,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-02-05T05:00:00.000Z",
+    "liquidCAD": 1690766,
+    "liquidUSD": 1239619,
+    "fxRate": 1.3639,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-02-06T05:00:00.000Z",
+    "liquidCAD": 1581999,
+    "liquidUSD": 1157345,
+    "fxRate": 1.3669,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-02-07T05:00:00.000Z",
+    "liquidCAD": 1672513,
+    "liquidUSD": 1219726,
+    "fxRate": 1.3712,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-02-08T05:00:00.000Z",
+    "liquidCAD": 1663964,
+    "liquidUSD": 1213492,
+    "fxRate": 1.3712,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-02-09T05:00:00.000Z",
+    "liquidCAD": 1671180,
+    "liquidUSD": 1218754,
+    "fxRate": 1.3712,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-02-10T05:00:00.000Z",
+    "liquidCAD": 1667185,
+    "liquidUSD": 1220585,
+    "fxRate": 1.3659,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-02-11T05:00:00.000Z",
+    "liquidCAD": 1643622,
+    "liquidUSD": 1211914,
+    "fxRate": 1.3562,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-02-12T05:00:00.000Z",
+    "liquidCAD": 1622830,
+    "liquidUSD": 1197484,
+    "fxRate": 1.3552,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-02-13T05:00:00.000Z",
+    "liquidCAD": 1608296,
+    "liquidUSD": 1184713,
+    "fxRate": 1.3575,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-02-14T05:00:00.000Z",
+    "liquidCAD": 1636777,
+    "liquidUSD": 1202566,
+    "fxRate": 1.3611,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-02-15T05:00:00.000Z",
+    "liquidCAD": 1646743,
+    "liquidUSD": 1209888,
+    "fxRate": 1.3611,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-02-16T05:00:00.000Z",
+    "liquidCAD": 1631917,
+    "liquidUSD": 1198996,
+    "fxRate": 1.3611,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-02-17T05:00:00.000Z",
+    "liquidCAD": 1635105,
+    "liquidUSD": 1200703,
+    "fxRate": 1.3618,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-02-18T05:00:00.000Z",
+    "liquidCAD": 1625246,
+    "liquidUSD": 1191862,
+    "fxRate": 1.3636,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-02-19T05:00:00.000Z",
+    "liquidCAD": 1620534,
+    "liquidUSD": 1188275,
+    "fxRate": 1.3638,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-02-20T05:00:00.000Z",
+    "liquidCAD": 1625146,
+    "liquidUSD": 1186576,
+    "fxRate": 1.3696,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-02-21T05:00:00.000Z",
+    "liquidCAD": 1641676,
+    "liquidUSD": 1199460,
+    "fxRate": 1.3687,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-02-22T05:00:00.000Z",
+    "liquidCAD": 1642150,
+    "liquidUSD": 1199806,
+    "fxRate": 1.3687,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-02-23T05:00:00.000Z",
+    "liquidCAD": 1638038,
+    "liquidUSD": 1196801,
+    "fxRate": 1.3687,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-02-24T05:00:00.000Z",
+    "liquidCAD": 1594655,
+    "liquidUSD": 1168374,
+    "fxRate": 1.3649,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-02-25T05:00:00.000Z",
+    "liquidCAD": 1599282,
+    "liquidUSD": 1167887,
+    "fxRate": 1.3694,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-02-26T05:00:00.000Z",
+    "liquidCAD": 1650164,
+    "liquidUSD": 1204473,
+    "fxRate": 1.37,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-02-27T05:00:00.000Z",
+    "liquidCAD": 1637827,
+    "liquidUSD": 1197610,
+    "fxRate": 1.3676,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-02-28T05:00:00.000Z",
+    "liquidCAD": 1615185,
+    "liquidUSD": 1181054,
+    "fxRate": 1.3676,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-03-01T05:00:00.000Z",
+    "liquidCAD": 1625976,
+    "liquidUSD": 1188944,
+    "fxRate": 1.3676,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-03-02T05:00:00.000Z",
+    "liquidCAD": 1614708,
+    "liquidUSD": 1180705,
+    "fxRate": 1.3676,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-03-03T05:00:00.000Z",
+    "liquidCAD": 1643407,
+    "liquidUSD": 1202340,
+    "fxRate": 1.3668,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-03-04T05:00:00.000Z",
+    "liquidCAD": 1630141,
+    "liquidUSD": 1192408,
+    "fxRate": 1.3671,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-03-05T05:00:00.000Z",
+    "liquidCAD": 1678570,
+    "liquidUSD": 1227554,
+    "fxRate": 1.3674,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-03-06T05:00:00.000Z",
+    "liquidCAD": 1656655,
+    "liquidUSD": 1214200,
+    "fxRate": 1.3644,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-03-07T05:00:00.000Z",
+    "liquidCAD": 1618212,
+    "liquidUSD": 1183778,
+    "fxRate": 1.367,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-03-08T05:00:00.000Z",
+    "liquidCAD": 1610713,
+    "liquidUSD": 1178292,
+    "fxRate": 1.367,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-03-09T05:00:00.000Z",
+    "liquidCAD": 1598568,
+    "liquidUSD": 1169407,
+    "fxRate": 1.367,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-03-10T05:00:00.000Z",
+    "liquidCAD": 1622506,
+    "liquidUSD": 1192835,
+    "fxRate": 1.3602,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-03-11T05:00:00.000Z",
+    "liquidCAD": 1635057,
+    "liquidUSD": 1203362,
+    "fxRate": 1.3587,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-03-12T05:00:00.000Z",
+    "liquidCAD": 1636776,
+    "liquidUSD": 1205027,
+    "fxRate": 1.3583,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-03-13T05:00:00.000Z",
+    "liquidCAD": 1630755,
+    "liquidUSD": 1198935,
+    "fxRate": 1.3602,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-03-14T05:00:00.000Z",
+    "liquidCAD": 1637088,
+    "liquidUSD": 1200862,
+    "fxRate": 1.3633,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-03-15T05:00:00.000Z",
+    "liquidCAD": 1639500,
+    "liquidUSD": 1202632,
+    "fxRate": 1.3633,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-03-16T05:00:00.000Z",
+    "liquidCAD": 1656938,
+    "liquidUSD": 1215423,
+    "fxRate": 1.3633,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-03-17T05:00:00.000Z",
+    "liquidCAD": 1694281,
+    "liquidUSD": 1235646,
+    "fxRate": 1.3712,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-03-18T05:00:00.000Z",
+    "liquidCAD": 1686381,
+    "liquidUSD": 1232375,
+    "fxRate": 1.3684,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-03-19T05:00:00.000Z",
+    "liquidCAD": 1648793,
+    "liquidUSD": 1204421,
+    "fxRate": 1.369,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-03-20T05:00:00.000Z",
+    "liquidCAD": 1633520,
+    "liquidUSD": 1189797,
+    "fxRate": 1.3729,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-03-21T05:00:00.000Z",
+    "liquidCAD": 1625941,
+    "liquidUSD": 1183725,
+    "fxRate": 1.3736,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-03-22T05:00:00.000Z",
+    "liquidCAD": 1607544,
+    "liquidUSD": 1170331,
+    "fxRate": 1.3736,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-03-23T05:00:00.000Z",
+    "liquidCAD": 1599197,
+    "liquidUSD": 1164255,
+    "fxRate": 1.3736,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-03-24T05:00:00.000Z",
+    "liquidCAD": 1637974,
+    "liquidUSD": 1194747,
+    "fxRate": 1.371,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-03-25T05:00:00.000Z",
+    "liquidCAD": 1631024,
+    "liquidUSD": 1187867,
+    "fxRate": 1.3731,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-03-26T05:00:00.000Z",
+    "liquidCAD": 1647636,
+    "liquidUSD": 1197654,
+    "fxRate": 1.3757,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-03-27T05:00:00.000Z",
+    "liquidCAD": 1612073,
+    "liquidUSD": 1166968,
+    "fxRate": 1.3814,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-03-28T05:00:00.000Z",
+    "liquidCAD": 1576465,
+    "liquidUSD": 1138086,
+    "fxRate": 1.3852,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-03-29T05:00:00.000Z",
+    "liquidCAD": 1576481,
+    "liquidUSD": 1138097,
+    "fxRate": 1.3852,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-03-30T05:00:00.000Z",
+    "liquidCAD": 1576105,
+    "liquidUSD": 1133929,
+    "fxRate": 1.39,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-03-31T05:00:00.000Z",
+    "liquidCAD": 1584485,
+    "liquidUSD": 1137601,
+    "fxRate": 1.3928,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-04-01T05:00:00.000Z",
+    "liquidCAD": 1621055,
+    "liquidUSD": 1165983,
+    "fxRate": 1.3903,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-04-02T05:00:00.000Z",
+    "liquidCAD": 1625218,
+    "liquidUSD": 1171210,
+    "fxRate": 1.3876,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-04-03T05:00:00.000Z",
+    "liquidCAD": 1612501,
+    "liquidUSD": 1158655,
+    "fxRate": 1.3917,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-04-04T05:00:00.000Z",
+    "liquidCAD": 1612985,
+    "liquidUSD": 1159003,
+    "fxRate": 1.3917,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-04-05T05:00:00.000Z",
+    "liquidCAD": 1616800,
+    "liquidUSD": 1161744,
+    "fxRate": 1.3917,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-04-06T05:00:00.000Z",
+    "liquidCAD": 1634818,
+    "liquidUSD": 1172274,
+    "fxRate": 1.3946,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-04-07T05:00:00.000Z",
+    "liquidCAD": 1633549,
+    "liquidUSD": 1174235,
+    "fxRate": 1.3912,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-04-08T05:00:00.000Z",
+    "liquidCAD": 1661187,
+    "liquidUSD": 1200106,
+    "fxRate": 1.3842,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-04-09T05:00:00.000Z",
+    "liquidCAD": 1667687,
+    "liquidUSD": 1204062,
+    "fxRate": 1.3851,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-04-10T05:00:00.000Z",
+    "liquidCAD": 1673986,
+    "liquidUSD": 1211041,
+    "fxRate": 1.3823,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-04-11T05:00:00.000Z",
+    "liquidCAD": 1688079,
+    "liquidUSD": 1221236,
+    "fxRate": 1.3823,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-04-12T05:00:00.000Z",
+    "liquidCAD": 1690853,
+    "liquidUSD": 1223244,
+    "fxRate": 1.3823,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-04-13T05:00:00.000Z",
+    "liquidCAD": 1670458,
+    "liquidUSD": 1204133,
+    "fxRate": 1.3873,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-04-14T05:00:00.000Z",
+    "liquidCAD": 1709578,
+    "liquidUSD": 1240173,
+    "fxRate": 1.3785,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-04-15T05:00:00.000Z",
+    "liquidCAD": 1713880,
+    "liquidUSD": 1245000,
+    "fxRate": 1.3766,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-04-16T05:00:00.000Z",
+    "liquidCAD": 1729026,
+    "liquidUSD": 1259186,
+    "fxRate": 1.3731,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-04-17T05:00:00.000Z",
+    "liquidCAD": 1730140,
+    "liquidUSD": 1262839,
+    "fxRate": 1.37,
+    "source": "backfill"
+  },
+  {
+    "timestamp": "2026-04-18T05:00:00.000Z",
+    "liquidCAD": 1738585,
+    "liquidUSD": 1270245,
+    "fxRate": 1.3687,
+    "source": "backfill"
+  }
+]
