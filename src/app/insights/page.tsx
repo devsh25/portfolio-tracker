@@ -9,6 +9,7 @@ import {
   getCountryExposure, getRealEstateCAD,
 } from "@/lib/insights";
 import type { HoldingsData, PriceData, OwnerSummary, ChartSlice, EntityTotal, CountryTotal, WhatIfScenario } from "@/lib/types";
+import { formatCAD, formatUSD } from "@/lib/calculations";
 import Navigation from "@/components/Navigation";
 import AssetAllocation from "@/components/insights/AssetAllocation";
 import OwnerComparison from "@/components/insights/OwnerComparison";
@@ -30,6 +31,9 @@ export default function InsightsPage() {
   const [countryData, setCountryData] = useState<CountryTotal[]>([]);
   const [totalCAD, setTotalCAD] = useState(0);
   const [totalUSD, setTotalUSD] = useState(0);
+  const [investableCAD, setInvestableCAD] = useState(0);
+  const [investableUSD, setInvestableUSD] = useState(0);
+  const [realEstateCAD, setRealEstateCAD] = useState(0);
 
   const fetchAndCalculate = useCallback(async () => {
     try {
@@ -50,6 +54,9 @@ export default function InsightsPage() {
 
       setTotalCAD(grandCAD);
       setTotalUSD(grandUSD);
+      setInvestableCAD(portfolioCAD);
+      setInvestableUSD(portfolioCAD / fxRate);
+      setRealEstateCAD(realEstateCAD);
       setAllocation(getAssetAllocation(summaries, holdings, fxRate, inrRate));
       setEntities(getEntityTotals(summaries, holdings, fxRate, inrRate));
       setConcentration(getConcentrationRisk(summaries, holdings, fxRate, inrRate));
@@ -90,6 +97,24 @@ export default function InsightsPage() {
           <div className="mb-2">
             <h1 className="text-2xl font-bold text-gray-900">Portfolio Insights</h1>
             <p className="text-sm text-gray-500">Analysis including real estate &middot; {holdingsData.lastUpdated}</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="rounded-xl border-2 border-indigo-500 bg-gradient-to-br from-indigo-600 to-indigo-800 p-5 shadow-md">
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-semibold text-indigo-100 uppercase tracking-wider">Liquid Portfolio</span>
+                <span className="text-[10px] px-1.5 py-0.5 rounded bg-indigo-400/30 text-indigo-50 font-medium">ex-Real Estate</span>
+              </div>
+              <div className="text-3xl font-bold text-white mt-1.5">{formatCAD(investableCAD)} <span className="text-sm font-normal text-indigo-200">CAD</span></div>
+              <div className="text-sm text-indigo-200 mt-0.5">{formatUSD(investableUSD)} USD</div>
+              <div className="text-[11px] text-indigo-200/80 mt-2">Stocks, ETFs, crypto, cash</div>
+            </div>
+            <div className="rounded-xl border-2 border-gray-700 bg-gray-900 p-5 shadow-md">
+              <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Grand Total <span className="text-[10px] font-normal normal-case">(incl. real estate)</span></div>
+              <div className="text-3xl font-bold text-white mt-1.5">{formatCAD(totalCAD)} <span className="text-sm font-normal text-gray-400">CAD</span></div>
+              <div className="text-sm text-gray-400 mt-0.5">{formatUSD(totalUSD)} USD</div>
+              <div className="text-[11px] text-gray-400/80 mt-2">Real estate: {formatCAD(realEstateCAD)} CAD</div>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
