@@ -4,6 +4,10 @@ on:
   schedule:
     # 3x/day: 13:00, 17:00, 21:00 UTC (~9am/1pm/5pm ET)
     - cron: "0 13,17,21 * * *"
+  push:
+    branches: [main]
+    paths-ignore:
+      - "data/snapshots.json"
   workflow_dispatch:
 
 permissions:
