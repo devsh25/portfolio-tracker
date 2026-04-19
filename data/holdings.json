@@ -142,8 +142,8 @@
     "Questrade": "same"
   },
   "cryptoEntityMapping": {
-    "Ledger": ["Dev", "Shalini"],
-    "Coinbase": ["Dev", "Shalini"],
+    "Ledger": ["Dev"],
+    "Coinbase": ["Dev"],
     "Binance": ["Dev"]
   },
   "countryMapping": {
