@@ -65,23 +65,23 @@ export default function Home() {
   return (
     <>
     <Navigation />
-    <main className="min-h-screen bg-gray-50 p-4 md:p-8">
+    <main className="min-h-screen bg-neutral-950 p-4 md:p-8">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-2">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Portfolio Tracker</h1>
-            <p className="text-sm text-gray-500">
+            <h1 className="text-2xl font-bold text-white tracking-tight">Portfolio Tracker</h1>
+            <p className="text-sm text-neutral-500">
               Holdings as of {holdingsData.lastUpdated} &middot; CAD/USD: {fxRate.toFixed(4)}
             </p>
           </div>
           <div className="flex items-center gap-3">
             {lastRefresh && (
-              <span className="text-xs text-gray-400">Last refresh: {lastRefresh}</span>
+              <span className="text-xs text-neutral-500">Last refresh: {lastRefresh}</span>
             )}
             <button
               onClick={fetchPrices}
               disabled={loading}
-              className="px-3 py-1.5 text-sm bg-gray-900 text-white rounded-lg hover:bg-gray-700 disabled:opacity-50 transition-colors"
+              className="px-3 py-1.5 text-sm bg-white text-neutral-950 rounded-lg hover:bg-neutral-200 disabled:opacity-50 transition-colors font-medium"
             >
               {loading ? "Refreshing..." : "Refresh Prices"}
             </button>
@@ -89,14 +89,14 @@ export default function Home() {
         </div>
 
         {error && (
-          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-2 rounded-lg mb-4 text-sm">
+          <div className="bg-red-500/10 border border-red-500/30 text-red-400 px-4 py-2 rounded-lg mb-4 text-sm">
             {error}
           </div>
         )}
 
         {loading && summaries.length === 0 ? (
-          <div className="text-center py-20 text-gray-400">
-            <div className="animate-spin inline-block w-8 h-8 border-4 border-gray-300 border-t-gray-900 rounded-full mb-4"></div>
+          <div className="text-center py-20 text-neutral-500">
+            <div className="animate-spin inline-block w-8 h-8 border-4 border-neutral-800 border-t-white rounded-full mb-4"></div>
             <p>Fetching live prices...</p>
           </div>
         ) : (

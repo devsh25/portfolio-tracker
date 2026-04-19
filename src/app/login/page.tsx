@@ -35,12 +35,12 @@ function LoginForm() {
   };
 
   return (
-    <main className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-      <form onSubmit={submit} className="bg-white rounded-xl shadow-md border p-8 w-full max-w-sm">
+    <main className="min-h-screen bg-neutral-950 flex items-center justify-center p-4">
+      <form onSubmit={submit} className="bg-neutral-900 border border-neutral-800 rounded-xl p-8 w-full max-w-sm">
         <div className="text-center mb-6">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gray-900 text-white mb-3">🔒</div>
-          <h1 className="text-xl font-bold text-gray-900">Portfolio Tracker</h1>
-          <p className="text-sm text-gray-500 mt-1">Enter password to continue</p>
+          <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white text-neutral-950 mb-3">🔒</div>
+          <h1 className="text-xl font-bold text-white tracking-tight">Portfolio Tracker</h1>
+          <p className="text-sm text-neutral-500 mt-1">Enter password to continue</p>
         </div>
         <input
           type="password"
@@ -48,13 +48,13 @@ function LoginForm() {
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
           autoFocus
-          className="w-full border rounded-lg px-3 py-2 text-sm mb-3 focus:outline-none focus:border-gray-900"
+          className="w-full bg-neutral-950 border border-neutral-800 text-white placeholder-neutral-600 rounded-lg px-3 py-2 text-sm mb-3 focus:outline-none focus:border-cyan-400"
         />
-        {error && <div className="text-red-600 text-sm mb-3">{error}</div>}
+        {error && <div className="text-red-400 text-sm mb-3">{error}</div>}
         <button
           type="submit"
           disabled={loading || !password}
-          className="w-full bg-gray-900 text-white rounded-lg py-2 text-sm font-medium hover:bg-gray-700 disabled:opacity-50 transition-colors"
+          className="w-full bg-white text-neutral-950 rounded-lg py-2 text-sm font-semibold hover:bg-neutral-200 disabled:opacity-50 transition-colors"
         >
           {loading ? "Signing in..." : "Sign In"}
         </button>
@@ -65,7 +65,7 @@ function LoginForm() {
 
 export default function LoginPage() {
   return (
-    <Suspense fallback={<main className="min-h-screen bg-gray-50" />}>
+    <Suspense fallback={<main className="min-h-screen bg-neutral-950" />}>
       <LoginForm />
     </Suspense>
   );

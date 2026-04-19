@@ -36,63 +36,64 @@ function groupRows(rows: PortfolioRow[]): Map<string, PortfolioRow[]> {
   return sorted;
 }
 
-const OWNER_HEADER_COLORS: Record<string, string> = {
-  Dev: "bg-blue-600",
-  Shalini: "bg-purple-600",
-  Vegrow: "bg-emerald-600",
+const OWNER_ACCENT: Record<string, string> = {
+  Dev: "border-l-cyan-400",
+  Shalini: "border-l-blue-400",
+  Vegrow: "border-l-orange-400",
 };
 
 export default function PortfolioTable({ summary }: Props) {
   const groups = groupRows(summary.rows);
 
   return (
-    <div className="mb-8 overflow-x-auto">
-      <div className={`${OWNER_HEADER_COLORS[summary.owner] || "bg-gray-700"} text-white px-4 py-3 rounded-t-lg flex justify-between items-center`}>
-        <h2 className="text-lg font-bold">{summary.owner}</h2>
+    <div className="mb-8 rounded-xl border border-neutral-800 bg-neutral-900 overflow-hidden">
+      <div className={`px-5 py-3 border-b border-neutral-800 border-l-4 ${OWNER_ACCENT[summary.owner] || "border-l-neutral-700"} flex justify-between items-center`}>
+        <h2 className="text-lg font-semibold text-white tracking-tight">{summary.owner}</h2>
         <div className="text-right">
-          <span className="text-sm opacity-80">Total: </span>
-          <span className="font-bold">{formatCAD(summary.totalCAD)} CAD</span>
-          <span className="text-sm opacity-60 ml-2">({formatUSD(summary.totalUSD)} USD)</span>
+          <span className="text-xs uppercase tracking-wider text-neutral-500 mr-2">Total</span>
+          <span className="font-bold text-white tabular-nums">{formatCAD(summary.totalCAD)}</span>
+          <span className="text-xs text-neutral-500 ml-1">CAD</span>
+          <span className="text-xs text-neutral-500 ml-2 tabular-nums">({formatUSD(summary.totalUSD)} USD)</span>
         </div>
       </div>
-      <table className="w-full text-sm border border-gray-200 border-t-0">
-        <thead>
-          <tr className="bg-gray-100 text-gray-600 text-xs uppercase tracking-wider">
-            <th className="text-left px-4 py-2">Asset</th>
-            <th className="text-left px-4 py-2">Account</th>
-            <th className="text-right px-4 py-2">Qty</th>
-            <th className="text-right px-4 py-2">Value USD</th>
-            <th className="text-right px-4 py-2">Value CAD</th>
-          </tr>
-        </thead>
-        <tbody>
-          {Array.from(groups.entries()).map(([groupName, rows], gi) => {
-            const groupUSD = rows.reduce((s, r) => s + r.valueUSD, 0);
-            const groupCAD = rows.reduce((s, r) => s + r.valueCAD, 0);
-            return (
-              <React.Fragment key={groupName}>
-                {rows.map((row, ri) => (
-                  <tr key={`${groupName}-${ri}`} className="border-t border-gray-100 hover:bg-gray-50">
-                    <td className="px-4 py-1.5 font-medium text-gray-800">{row.accountType === "cash" ? "Cash" : row.asset}</td>
-                    <td className="px-4 py-1.5 text-gray-500">{row.accountType === "cash" ? row.account : groupName}</td>
-                    <td className="px-4 py-1.5 text-right text-gray-600 tabular-nums">{formatQty(row.qty)}</td>
-                    <td className="px-4 py-1.5 text-right tabular-nums">{formatUSD(row.valueUSD)}</td>
-                    <td className="px-4 py-1.5 text-right tabular-nums">{formatCAD(row.valueCAD)}</td>
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="border-b border-neutral-800 text-neutral-500 text-[10px] uppercase tracking-widest">
+              <th className="text-left px-5 py-2 font-semibold">Asset</th>
+              <th className="text-left px-5 py-2 font-semibold">Account</th>
+              <th className="text-right px-5 py-2 font-semibold">Qty</th>
+              <th className="text-right px-5 py-2 font-semibold">Value USD</th>
+              <th className="text-right px-5 py-2 font-semibold">Value CAD</th>
+            </tr>
+          </thead>
+          <tbody>
+            {Array.from(groups.entries()).map(([groupName, rows], gi) => {
+              const groupUSD = rows.reduce((s, r) => s + r.valueUSD, 0);
+              const groupCAD = rows.reduce((s, r) => s + r.valueCAD, 0);
+              return (
+                <React.Fragment key={groupName}>
+                  {rows.map((row, ri) => (
+                    <tr key={`${groupName}-${ri}`} className="border-t border-neutral-800/60 hover:bg-neutral-800/40 transition-colors">
+                      <td className="px-5 py-2 font-medium text-neutral-100">{row.accountType === "cash" ? "Cash" : row.asset}</td>
+                      <td className="px-5 py-2 text-neutral-400">{row.accountType === "cash" ? row.account : groupName}</td>
+                      <td className="px-5 py-2 text-right text-neutral-400 tabular-nums">{formatQty(row.qty)}</td>
+                      <td className="px-5 py-2 text-right text-neutral-300 tabular-nums">{formatUSD(row.valueUSD)}</td>
+                      <td className="px-5 py-2 text-right text-white tabular-nums">{formatCAD(row.valueCAD)}</td>
+                    </tr>
+                  ))}
+                  <tr className="bg-neutral-900/80 text-xs border-t border-neutral-800">
+                    <td className="px-5 py-1.5 text-neutral-500 uppercase tracking-wider" colSpan={3}>{groupName} Subtotal</td>
+                    <td className="px-5 py-1.5 text-right font-semibold text-neutral-300 tabular-nums">{formatUSD(groupUSD)}</td>
+                    <td className="px-5 py-1.5 text-right font-semibold text-neutral-100 tabular-nums">{formatCAD(groupCAD)}</td>
                   </tr>
-                ))}
-                <tr className="bg-gray-50 font-medium text-xs">
-                  <td className="px-4 py-1 text-gray-500" colSpan={3}>{groupName} Subtotal</td>
-                  <td className="px-4 py-1 text-right tabular-nums">{formatUSD(groupUSD)}</td>
-                  <td className="px-4 py-1 text-right tabular-nums">{formatCAD(groupCAD)}</td>
-                </tr>
-                {gi < groups.size - 1 && (
-                  <tr><td colSpan={5} className="h-1"></td></tr>
-                )}
-              </React.Fragment>
-            );
-          })}
-        </tbody>
-      </table>
+                  {gi < groups.size - 1 && <tr><td colSpan={5} className="h-1 bg-neutral-950"></td></tr>}
+                </React.Fragment>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
