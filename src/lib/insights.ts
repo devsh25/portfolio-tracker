@@ -46,6 +46,56 @@ export function getAssetAllocation(
     .sort((a, b) => b.value - a.value);
 }
 
+// Build per-entity OwnerSummary-shaped data (liquid only; no real estate)
+// Splits crypto across multiple owners when cryptoEntityMapping is an array,
+// and re-attributes cash accounts via entityMapping.
+export function getEntitySummaries(
+  summaries: OwnerSummary[], holdings: HoldingsData
+): OwnerSummary[] {
+  const entities: Record<string, { rows: PortfolioRow[]; totalCAD: number; totalUSD: number }> = {};
+  const ensure = (e: string) => {
+    if (!entities[e]) entities[e] = { rows: [], totalCAD: 0, totalUSD: 0 };
+  };
+
+  for (const summary of summaries) {
+    for (const row of summary.rows) {
+      if (row.accountType === "crypto") {
+        const mapped = holdings.cryptoEntityMapping[row.account];
+        const owners = Array.isArray(mapped) ? mapped : mapped ? [mapped] : [summary.owner];
+        const n = owners.length;
+        for (const o of owners) {
+          ensure(o);
+          const share: PortfolioRow = {
+            ...row,
+            owner: o,
+            qty: row.qty / n,
+            valueUSD: row.valueUSD / n,
+            valueCAD: row.valueCAD / n,
+          };
+          entities[o].rows.push(share);
+          entities[o].totalCAD += share.valueCAD;
+          entities[o].totalUSD += share.valueUSD;
+        }
+        continue;
+      }
+
+      let entity = summary.owner;
+      if (row.accountType === "cash") {
+        const mapped = holdings.entityMapping[row.account];
+        if (mapped && mapped !== "same") entity = mapped;
+      }
+      ensure(entity);
+      entities[entity].rows.push({ ...row, owner: entity });
+      entities[entity].totalCAD += row.valueCAD;
+      entities[entity].totalUSD += row.valueUSD;
+    }
+  }
+
+  return Object.entries(entities)
+    .map(([owner, data]) => ({ owner, totalCAD: data.totalCAD, totalUSD: data.totalUSD, rows: data.rows }))
+    .sort((a, b) => b.totalCAD - a.totalCAD);
+}
+
 // ── 2. Entity/Owner Comparison ──
 export function getEntityTotals(
   summaries: OwnerSummary[], holdings: HoldingsData, fxRate: number, inrRate: number

@@ -3,7 +3,7 @@
 import { useEffect, useState, useCallback } from "react";
 import holdingsData from "../../data/holdings.json";
 import { buildPortfolio, buildCategories } from "@/lib/calculations";
-import { getEntityTotals, getRealEstateCAD } from "@/lib/insights";
+import { getEntityTotals, getRealEstateCAD, getEntitySummaries } from "@/lib/insights";
 import type { HoldingsData, PriceData, OwnerSummary, CategorySummary, EntityTotal } from "@/lib/types";
 import SummaryCards from "@/components/SummaryCards";
 import PortfolioTable from "@/components/PortfolioTable";
@@ -61,8 +61,9 @@ export default function Home() {
   const grandCAD = entities.reduce((s, e) => s + e.totalCAD, 0);
   const investableCAD = grandCAD - realEstateCAD;
   const investableUSD = investableCAD / fxRate;
-  const ownersTotalCAD = summaries.reduce((s, o) => s + o.totalCAD, 0);
-  const rankedSummaries = [...summaries].sort((a, b) => b.totalCAD - a.totalCAD);
+  const holdings = holdingsData as unknown as HoldingsData;
+  const entitySummaries = getEntitySummaries(summaries, holdings);
+  const ownersTotalCAD = entitySummaries.reduce((s, o) => s + o.totalCAD, 0);
 
   return (
     <>
@@ -109,7 +110,7 @@ export default function Home() {
               investableUSD={investableUSD}
               investableCAD={investableCAD}
             />
-            {rankedSummaries.map((s, i) => (
+            {entitySummaries.map((s, i) => (
               <PortfolioTable
                 key={s.owner}
                 summary={s}
