@@ -24,8 +24,8 @@ export default function CountryExposure({ data }: Props) {
               <div className="text-2xl mb-1">{FLAG[d.country] || "\ud83c\udf10"}</div>
               <div className="text-sm font-semibold text-neutral-200">{d.country}</div>
               <div className="text-lg font-bold text-white tabular-nums">{formatCAD(d.totalCAD)}</div>
-              <div className="text-xs text-neutral-500 tabular-nums">{pct}% of total</div>
-              <div className="text-[10px] text-neutral-600 mt-1">{d.assets.slice(0, 4).join(", ")}{d.assets.length > 4 ? "..." : ""}</div>
+              <div className="text-xs text-neutral-400 tabular-nums">{pct}% of total</div>
+              <div className="text-[10px] text-neutral-400 mt-1">{d.assets.slice(0, 4).join(", ")}{d.assets.length > 4 ? "..." : ""}</div>
             </div>
           );
         })}
@@ -34,12 +34,12 @@ export default function CountryExposure({ data }: Props) {
         <ResponsiveContainer>
           <BarChart data={chartData}>
             <CartesianGrid strokeDasharray="3 3" stroke="#262626" />
-            <XAxis dataKey="name" tick={{ fill: "#d4d4d4", fontSize: 12 }} stroke="#404040" />
-            <YAxis tickFormatter={(v) => `$${(v / 1000000).toFixed(1)}M`} tick={{ fill: "#737373", fontSize: 11 }} stroke="#404040" />
-            <Tooltip contentStyle={{ background: "#0a0a0a", border: "1px solid #262626", borderRadius: 8, fontSize: 12, color: "#fff" }} cursor={{ fill: "#262626" }} formatter={(v) => formatCAD(Number(v)) + " CAD"} />
+            <XAxis dataKey="name" tick={{ fill: "#d4d4d4", fontSize: 14 }} stroke="#404040" />
+            <YAxis tickFormatter={(v) => `$${(v / 1000000).toFixed(1)}M`} tick={{ fill: "#a3a3a3", fontSize: 13 }} stroke="#404040" />
+            <Tooltip contentStyle={{ background: "#0a0a0a", border: "1px solid #262626", borderRadius: 8, fontSize: 14, color: "#fff" }} cursor={{ fill: "#262626" }} formatter={(v) => formatCAD(Number(v)) + " CAD"} />
             <Bar dataKey="value">
               {chartData.map((d, i) => (
-                <Cell key={i} fill={COLORS[d.name] || "#737373"} />
+                <Cell key={i} fill={COLORS[d.name] || "#a3a3a3"} />
               ))}
             </Bar>
           </BarChart>

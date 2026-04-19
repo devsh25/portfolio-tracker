@@ -19,7 +19,7 @@ export default function AssetAllocation({ data }: Props) {
               <Pie data={data} dataKey="value" cx="50%" cy="50%" innerRadius={60} outerRadius={100} paddingAngle={2} stroke="#0a0a0a">
                 {data.map((d, i) => <Cell key={i} fill={d.color} />)}
               </Pie>
-              <Tooltip contentStyle={{ background: "#0a0a0a", border: "1px solid #262626", borderRadius: 8, fontSize: 12, color: "#fff" }} formatter={(v) => formatCAD(Number(v)) + " CAD"} />
+              <Tooltip contentStyle={{ background: "#0a0a0a", border: "1px solid #262626", borderRadius: 8, fontSize: 14, color: "#fff" }} formatter={(v) => formatCAD(Number(v)) + " CAD"} />
             </PieChart>
           </ResponsiveContainer>
         </div>
@@ -32,7 +32,7 @@ export default function AssetAllocation({ data }: Props) {
               </div>
               <div className="text-right">
                 <span className="text-sm font-semibold text-white tabular-nums">{formatCAD(d.value)}</span>
-                <span className="text-xs text-neutral-500 ml-2 tabular-nums">{d.percent?.toFixed(1)}%</span>
+                <span className="text-xs text-neutral-400 ml-2 tabular-nums">{d.percent?.toFixed(1)}%</span>
               </div>
             </div>
           ))}

@@ -19,11 +19,11 @@ const CAT_DOT: Record<string, string> = {
 export default function CategoryBreakdown({ categories, grandUSD, grandCAD }: Props) {
   return (
     <div className="mb-8">
-      <h2 className="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">By Category</h2>
+      <h2 className="text-xs font-semibold text-neutral-400 uppercase tracking-widest mb-3">By Category</h2>
       <div className="rounded-xl border border-neutral-800 bg-neutral-900 overflow-hidden">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-neutral-800 text-neutral-500 text-[10px] uppercase tracking-widest">
+            <tr className="border-b border-neutral-800 text-neutral-400 text-[10px] uppercase tracking-widest">
               <th className="text-left px-5 py-2 font-semibold">Category / Asset</th>
               <th className="text-right px-5 py-2 font-semibold">Qty</th>
               <th className="text-right px-5 py-2 font-semibold">Value USD</th>
@@ -45,7 +45,7 @@ export default function CategoryBreakdown({ categories, grandUSD, grandCAD }: Pr
                 {cat.items.map((item, i) => (
                   <tr key={`${cat.name}-${i}`} className="border-t border-neutral-800/60 hover:bg-neutral-800/40 transition-colors">
                     <td className="px-5 py-1.5 pl-10 text-neutral-400">{item.asset}</td>
-                    <td className="px-5 py-1.5 text-right text-neutral-500 tabular-nums">{formatQty(item.qty)}</td>
+                    <td className="px-5 py-1.5 text-right text-neutral-400 tabular-nums">{formatQty(item.qty)}</td>
                     <td className="px-5 py-1.5 text-right text-neutral-300 tabular-nums">{formatUSD(item.valueUSD)}</td>
                     <td className="px-5 py-1.5 text-right text-neutral-100 tabular-nums">{formatCAD(item.valueCAD)}</td>
                   </tr>

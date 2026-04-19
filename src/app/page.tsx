@@ -70,13 +70,13 @@ export default function Home() {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-2">
           <div>
             <h1 className="text-2xl font-bold text-white tracking-tight">Portfolio Tracker</h1>
-            <p className="text-sm text-neutral-500">
+            <p className="text-sm text-neutral-400">
               Holdings as of {holdingsData.lastUpdated} &middot; CAD/USD: {fxRate.toFixed(4)}
             </p>
           </div>
           <div className="flex items-center gap-3">
             {lastRefresh && (
-              <span className="text-xs text-neutral-500">Last refresh: {lastRefresh}</span>
+              <span className="text-xs text-neutral-400">Last refresh: {lastRefresh}</span>
             )}
             <button
               onClick={fetchPrices}
@@ -95,7 +95,7 @@ export default function Home() {
         )}
 
         {loading && summaries.length === 0 ? (
-          <div className="text-center py-20 text-neutral-500">
+          <div className="text-center py-20 text-neutral-400">
             <div className="animate-spin inline-block w-8 h-8 border-4 border-neutral-800 border-t-white rounded-full mb-4"></div>
             <p>Fetching live prices...</p>
           </div>

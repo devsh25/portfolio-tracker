@@ -56,7 +56,7 @@ export default function PortfolioTable({ summary }: Props) {
       >
         <div className="flex items-center gap-3">
           <svg
-            className={`w-4 h-4 text-neutral-500 transition-transform ${open ? "rotate-90" : ""}`}
+            className={`w-4 h-4 text-neutral-400 transition-transform ${open ? "rotate-90" : ""}`}
             viewBox="0 0 20 20"
             fill="currentColor"
           >
@@ -65,17 +65,17 @@ export default function PortfolioTable({ summary }: Props) {
           <h2 className="text-lg font-semibold text-white tracking-tight">{summary.owner}</h2>
         </div>
         <div className="text-right">
-          <span className="text-xs uppercase tracking-wider text-neutral-500 mr-2">Total</span>
+          <span className="text-xs uppercase tracking-wider text-neutral-400 mr-2">Total</span>
           <span className="font-bold text-white tabular-nums">{formatCAD(summary.totalCAD)}</span>
-          <span className="text-xs text-neutral-500 ml-1">CAD</span>
-          <span className="text-xs text-neutral-500 ml-2 tabular-nums">({formatUSD(summary.totalUSD)} USD)</span>
+          <span className="text-xs text-neutral-400 ml-1">CAD</span>
+          <span className="text-xs text-neutral-400 ml-2 tabular-nums">({formatUSD(summary.totalUSD)} USD)</span>
         </div>
       </button>
       {open && (
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-neutral-800 text-neutral-500 text-[10px] uppercase tracking-widest">
+            <tr className="border-b border-neutral-800 text-neutral-400 text-[10px] uppercase tracking-widest">
               <th className="text-left px-5 py-2 font-semibold">Asset</th>
               <th className="text-left px-5 py-2 font-semibold">Account</th>
               <th className="text-right px-5 py-2 font-semibold">Qty</th>
@@ -99,7 +99,7 @@ export default function PortfolioTable({ summary }: Props) {
                     </tr>
                   ))}
                   <tr className="bg-neutral-900/80 text-xs border-t border-neutral-800">
-                    <td className="px-5 py-1.5 text-neutral-500 uppercase tracking-wider" colSpan={3}>{groupName} Subtotal</td>
+                    <td className="px-5 py-1.5 text-neutral-400 uppercase tracking-wider" colSpan={3}>{groupName} Subtotal</td>
                     <td className="px-5 py-1.5 text-right font-semibold text-neutral-300 tabular-nums">{formatUSD(groupUSD)}</td>
                     <td className="px-5 py-1.5 text-right font-semibold text-neutral-100 tabular-nums">{formatCAD(groupCAD)}</td>
                   </tr>

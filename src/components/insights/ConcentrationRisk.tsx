@@ -20,7 +20,7 @@ export default function ConcentrationRisk({ data }: Props) {
               <Pie data={data} dataKey="value" cx="50%" cy="50%" outerRadius={100} paddingAngle={1} stroke="#0a0a0a">
                 {data.map((d, i) => <Cell key={i} fill={d.color} />)}
               </Pie>
-              <Tooltip contentStyle={{ background: "#0a0a0a", border: "1px solid #262626", borderRadius: 8, fontSize: 12, color: "#fff" }} formatter={(v) => formatCAD(Number(v)) + " CAD"} />
+              <Tooltip contentStyle={{ background: "#0a0a0a", border: "1px solid #262626", borderRadius: 8, fontSize: 14, color: "#fff" }} formatter={(v) => formatCAD(Number(v)) + " CAD"} />
             </PieChart>
           </ResponsiveContainer>
         </div>

@@ -19,7 +19,7 @@ export default function LiquidGrowth() {
     return (
       <div className="rounded-xl border border-neutral-800 bg-neutral-900 p-6">
         <h3 className="text-sm font-semibold text-neutral-400 uppercase tracking-widest mb-2">Liquid Portfolio Growth</h3>
-        <p className="text-sm text-neutral-500">
+        <p className="text-sm text-neutral-400">
           Building history — snapshots populate via GitHub Actions 3×/day. First run will backfill from Jan 1, 2026.
         </p>
       </div>
@@ -45,7 +45,7 @@ export default function LiquidGrowth() {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-4 gap-2">
         <div>
           <h3 className="text-sm font-semibold text-neutral-400 uppercase tracking-widest">Liquid Portfolio Growth</h3>
-          <p className="text-xs text-neutral-500 mt-0.5">
+          <p className="text-xs text-neutral-400 mt-0.5">
             Excludes real estate · {first.date} → {last.date} · {raw.length} snapshots
           </p>
         </div>
@@ -70,19 +70,19 @@ export default function LiquidGrowth() {
           <CartesianGrid strokeDasharray="3 3" stroke="#262626" />
           <XAxis
             dataKey="date"
-            tick={{ fontSize: 11, fill: "#737373" }}
+            tick={{ fontSize: 13, fill: "#a3a3a3" }}
             stroke="#404040"
             minTickGap={40}
           />
           <YAxis
             tickFormatter={(v) => `$${(v / 1000).toFixed(0)}k`}
-            tick={{ fontSize: 11, fill: "#737373" }}
+            tick={{ fontSize: 13, fill: "#a3a3a3" }}
             stroke="#404040"
             domain={["dataMin - 20000", "dataMax + 20000"]}
             width={60}
           />
           <Tooltip
-            contentStyle={{ background: "#0a0a0a", border: "1px solid #262626", borderRadius: 8, fontSize: 12, color: "#fff" }}
+            contentStyle={{ background: "#0a0a0a", border: "1px solid #262626", borderRadius: 8, fontSize: 14, color: "#fff" }}
             formatter={(v) => [formatCAD(Number(v)) + " CAD", "Liquid"]}
             labelFormatter={(label) => `Date: ${label}`}
           />
@@ -90,7 +90,7 @@ export default function LiquidGrowth() {
         </AreaChart>
       </ResponsiveContainer>
 
-      <p className="text-[11px] text-neutral-600 mt-3">
+      <p className="text-[11px] text-neutral-400 mt-3">
         Backfill uses today&rsquo;s quantities and cash balances against historical prices — values before the current date are approximate and do not reflect buys, sells, or deposits made during the year.
       </p>
     </div>

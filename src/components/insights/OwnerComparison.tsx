@@ -28,9 +28,9 @@ export default function OwnerComparison({ data }: Props) {
       <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-6">
         {data.map(d => (
           <div key={d.entity} className="rounded-lg p-3 bg-neutral-950 border-l-4" style={{ borderLeftColor: ENTITY_ACCENT[d.entity] || "#525252" }}>
-            <div className="text-[10px] text-neutral-500 uppercase tracking-widest">{d.entity}</div>
+            <div className="text-[10px] text-neutral-400 uppercase tracking-widest">{d.entity}</div>
             <div className="text-base font-bold text-white mt-0.5 tabular-nums">{formatCAD(d.totalCAD)}</div>
-            <div className="text-xs text-neutral-500 tabular-nums">{formatCAD(d.totalUSD)} USD</div>
+            <div className="text-xs text-neutral-400 tabular-nums">{formatCAD(d.totalUSD)} USD</div>
           </div>
         ))}
       </div>
@@ -38,12 +38,12 @@ export default function OwnerComparison({ data }: Props) {
         <ResponsiveContainer>
           <BarChart data={chartData} layout="vertical">
             <CartesianGrid strokeDasharray="3 3" stroke="#262626" />
-            <XAxis type="number" tickFormatter={(v) => `$${(v / 1000).toFixed(0)}K`} tick={{ fill: "#737373", fontSize: 11 }} stroke="#404040" />
-            <YAxis type="category" dataKey="name" width={80} tick={{ fill: "#d4d4d4", fontSize: 12 }} stroke="#404040" />
-            <Tooltip contentStyle={{ background: "#0a0a0a", border: "1px solid #262626", borderRadius: 8, fontSize: 12, color: "#fff" }} formatter={(v) => formatCAD(Number(v)) + " CAD"} />
-            <Legend wrapperStyle={{ fontSize: 12, color: "#d4d4d4" }} />
+            <XAxis type="number" tickFormatter={(v) => `$${(v / 1000).toFixed(0)}K`} tick={{ fill: "#a3a3a3", fontSize: 13 }} stroke="#404040" />
+            <YAxis type="category" dataKey="name" width={80} tick={{ fill: "#d4d4d4", fontSize: 14 }} stroke="#404040" />
+            <Tooltip contentStyle={{ background: "#0a0a0a", border: "1px solid #262626", borderRadius: 8, fontSize: 14, color: "#fff" }} formatter={(v) => formatCAD(Number(v)) + " CAD"} />
+            <Legend wrapperStyle={{ fontSize: 14, color: "#d4d4d4" }} />
             {allCategories.map(cat => (
-              <Bar key={cat} dataKey={cat} stackId="a" fill={catColors[cat] || "#737373"} />
+              <Bar key={cat} dataKey={cat} stackId="a" fill={catColors[cat] || "#a3a3a3"} />
             ))}
           </BarChart>
         </ResponsiveContainer>

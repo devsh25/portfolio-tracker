@@ -19,7 +19,7 @@ export default function CurrencyExposure({ data }: Props) {
               <Pie data={data} dataKey="value" cx="50%" cy="50%" innerRadius={50} outerRadius={90} paddingAngle={3} stroke="#0a0a0a">
                 {data.map((d, i) => <Cell key={i} fill={d.color} />)}
               </Pie>
-              <Tooltip contentStyle={{ background: "#0a0a0a", border: "1px solid #262626", borderRadius: 8, fontSize: 12, color: "#fff" }} formatter={(v) => formatCAD(Number(v)) + " CAD"} />
+              <Tooltip contentStyle={{ background: "#0a0a0a", border: "1px solid #262626", borderRadius: 8, fontSize: 14, color: "#fff" }} formatter={(v) => formatCAD(Number(v)) + " CAD"} />
             </PieChart>
           </ResponsiveContainer>
         </div>
@@ -28,7 +28,7 @@ export default function CurrencyExposure({ data }: Props) {
             <div key={d.name}>
               <div className="flex justify-between items-center mb-1">
                 <span className="text-sm font-medium text-neutral-200">{FLAG[d.name] || ""} {d.name}</span>
-                <span className="text-sm font-semibold text-white tabular-nums">{formatCAD(d.value)} <span className="text-neutral-500 font-normal">({d.percent?.toFixed(1)}%)</span></span>
+                <span className="text-sm font-semibold text-white tabular-nums">{formatCAD(d.value)} <span className="text-neutral-400 font-normal">({d.percent?.toFixed(1)}%)</span></span>
               </div>
               <div className="w-full bg-neutral-800 rounded-full h-2">
                 <div className="h-2 rounded-full transition-all" style={{ width: `${d.percent}%`, backgroundColor: d.color }} />
