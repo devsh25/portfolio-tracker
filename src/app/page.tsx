@@ -61,6 +61,8 @@ export default function Home() {
   const grandCAD = entities.reduce((s, e) => s + e.totalCAD, 0);
   const investableCAD = grandCAD - realEstateCAD;
   const investableUSD = investableCAD / fxRate;
+  const ownersTotalCAD = summaries.reduce((s, o) => s + o.totalCAD, 0);
+  const rankedSummaries = [...summaries].sort((a, b) => b.totalCAD - a.totalCAD);
 
   return (
     <>
@@ -102,14 +104,18 @@ export default function Home() {
         ) : (
           <>
             <SummaryCards
-              entities={entities}
               grandUSD={grandUSD}
               grandCAD={grandCAD}
               investableUSD={investableUSD}
               investableCAD={investableCAD}
             />
-            {summaries.map((s) => (
-              <PortfolioTable key={s.owner} summary={s} />
+            {rankedSummaries.map((s, i) => (
+              <PortfolioTable
+                key={s.owner}
+                summary={s}
+                rank={i + 1}
+                pctOfTotal={ownersTotalCAD > 0 ? (s.totalCAD / ownersTotalCAD) * 100 : 0}
+              />
             ))}
             <CategoryBreakdown
               categories={categories}

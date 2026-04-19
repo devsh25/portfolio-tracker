@@ -90,7 +90,7 @@ export default function LiquidGrowth() {
         </AreaChart>
       </ResponsiveContainer>
 
-      <p className="text-[11px] text-neutral-400 mt-3">
+      <p className="text-sm text-neutral-400 mt-3">
         Backfill uses today&rsquo;s quantities and cash balances against historical prices — values before the current date are approximate and do not reflect buys, sells, or deposits made during the year.
       </p>
     </div>

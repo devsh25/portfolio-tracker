@@ -28,7 +28,7 @@ export default function OwnerComparison({ data }: Props) {
       <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-6">
         {data.map(d => (
           <div key={d.entity} className="rounded-lg p-3 bg-neutral-950 border-l-4" style={{ borderLeftColor: ENTITY_ACCENT[d.entity] || "#525252" }}>
-            <div className="text-[10px] text-neutral-400 uppercase tracking-widest">{d.entity}</div>
+            <div className="text-xs text-neutral-400 uppercase tracking-widest">{d.entity}</div>
             <div className="text-base font-bold text-white mt-0.5 tabular-nums">{formatCAD(d.totalCAD)}</div>
             <div className="text-xs text-neutral-400 tabular-nums">{formatCAD(d.totalUSD)} USD</div>
           </div>

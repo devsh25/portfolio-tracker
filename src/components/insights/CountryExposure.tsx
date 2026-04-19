@@ -25,7 +25,7 @@ export default function CountryExposure({ data }: Props) {
               <div className="text-sm font-semibold text-neutral-200">{d.country}</div>
               <div className="text-lg font-bold text-white tabular-nums">{formatCAD(d.totalCAD)}</div>
               <div className="text-xs text-neutral-400 tabular-nums">{pct}% of total</div>
-              <div className="text-[10px] text-neutral-400 mt-1">{d.assets.slice(0, 4).join(", ")}{d.assets.length > 4 ? "..." : ""}</div>
+              <div className="text-xs text-neutral-400 mt-1">{d.assets.slice(0, 4).join(", ")}{d.assets.length > 4 ? "..." : ""}</div>
             </div>
           );
         })}

@@ -23,11 +23,11 @@ export default function IdleCashAnalysis({ totalCashCAD, projections }: Props) {
       <h3 className="text-sm font-semibold text-neutral-400 uppercase tracking-widest mb-4">Idle Cash Analysis</h3>
       <div className="grid grid-cols-2 gap-4 mb-6">
         <div className="rounded-lg p-4 bg-neutral-950 border-l-4 border-emerald-400">
-          <div className="text-[10px] text-emerald-400 uppercase tracking-widest">Cash Sitting Idle</div>
+          <div className="text-xs text-emerald-400 uppercase tracking-widest">Cash Sitting Idle</div>
           <div className="text-2xl font-bold text-emerald-400 tabular-nums">{formatCAD(totalCashCAD)} <span className="text-sm font-normal text-neutral-400">CAD</span></div>
         </div>
         <div className="rounded-lg p-4 bg-neutral-950 border-l-4 border-amber-400">
-          <div className="text-[10px] text-amber-400 uppercase tracking-widest">Opportunity Cost (10Y @ 10%)</div>
+          <div className="text-xs text-amber-400 uppercase tracking-widest">Opportunity Cost (10Y @ 10%)</div>
           <div className="text-2xl font-bold text-amber-400 tabular-nums">+{formatCAD(gain10y)} <span className="text-sm font-normal text-neutral-400">CAD</span></div>
           <div className="text-xs text-neutral-400 tabular-nums">Could grow to {formatCAD(projections[3]?.at10pct)}</div>
         </div>

@@ -7,9 +7,6 @@ import type { ChartSlice } from "@/lib/types";
 interface Props { data: ChartSlice[] }
 
 export default function ConcentrationRisk({ data }: Props) {
-  const highRisk = data.filter(d => (d.percent || 0) > 20);
-  const moderate = data.filter(d => (d.percent || 0) > 10 && (d.percent || 0) <= 20);
-
   return (
     <div className="rounded-xl border border-neutral-800 bg-neutral-900 p-6">
       <h3 className="text-sm font-semibold text-neutral-400 uppercase tracking-widest mb-4">Concentration Risk</h3>
@@ -31,23 +28,9 @@ export default function ConcentrationRisk({ data }: Props) {
                 <div className="w-3 h-3 rounded-full" style={{ backgroundColor: d.color }} />
                 <span className="text-sm text-neutral-300">{d.name}</span>
               </div>
-              <div className="flex items-center gap-2">
-                <span className="text-sm font-mono font-semibold text-white tabular-nums">{d.percent?.toFixed(1)}%</span>
-                {(d.percent || 0) > 20 && <span className="text-[10px] bg-red-500/15 text-red-400 border border-red-500/30 px-1.5 py-0.5 rounded-full font-semibold uppercase tracking-wider">High</span>}
-                {(d.percent || 0) > 10 && (d.percent || 0) <= 20 && <span className="text-[10px] bg-amber-500/15 text-amber-400 border border-amber-500/30 px-1.5 py-0.5 rounded-full font-semibold uppercase tracking-wider">Mod</span>}
-              </div>
+              <span className="text-sm font-mono font-semibold text-white tabular-nums">{d.percent?.toFixed(1)}%</span>
             </div>
           ))}
-          {highRisk.length > 0 && (
-            <div className="mt-4 bg-red-500/10 border border-red-500/30 rounded-lg p-3 text-sm text-red-300">
-              <strong className="text-red-400">Warning:</strong> {highRisk.map(d => d.name).join(", ")} exceed{highRisk.length === 1 ? "s" : ""} 20% of your portfolio
-            </div>
-          )}
-          {moderate.length > 0 && (
-            <div className="bg-amber-500/10 border border-amber-500/30 rounded-lg p-3 text-sm text-amber-300">
-              <strong className="text-amber-400">Watch:</strong> {moderate.map(d => d.name).join(", ")} at 10-20%
-            </div>
-          )}
         </div>
       </div>
     </div>
