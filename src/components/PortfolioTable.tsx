@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { formatUSD, formatCAD, formatQty } from "@/lib/calculations";
 import type { OwnerSummary, PortfolioRow } from "@/lib/types";
 
@@ -43,19 +43,35 @@ const OWNER_ACCENT: Record<string, string> = {
 };
 
 export default function PortfolioTable({ summary }: Props) {
+  const [open, setOpen] = useState(false);
   const groups = groupRows(summary.rows);
 
   return (
-    <div className="mb-8 rounded-xl border border-neutral-800 bg-neutral-900 overflow-hidden">
-      <div className={`px-5 py-3 border-b border-neutral-800 border-l-4 ${OWNER_ACCENT[summary.owner] || "border-l-neutral-700"} flex justify-between items-center`}>
-        <h2 className="text-lg font-semibold text-white tracking-tight">{summary.owner}</h2>
+    <div className="mb-4 rounded-xl border border-neutral-800 bg-neutral-900 overflow-hidden">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        className={`w-full px-5 py-3 border-l-4 ${OWNER_ACCENT[summary.owner] || "border-l-neutral-700"} ${open ? "border-b border-neutral-800" : ""} flex justify-between items-center hover:bg-neutral-800/40 transition-colors text-left`}
+      >
+        <div className="flex items-center gap-3">
+          <svg
+            className={`w-4 h-4 text-neutral-500 transition-transform ${open ? "rotate-90" : ""}`}
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+          </svg>
+          <h2 className="text-lg font-semibold text-white tracking-tight">{summary.owner}</h2>
+        </div>
         <div className="text-right">
           <span className="text-xs uppercase tracking-wider text-neutral-500 mr-2">Total</span>
           <span className="font-bold text-white tabular-nums">{formatCAD(summary.totalCAD)}</span>
           <span className="text-xs text-neutral-500 ml-1">CAD</span>
           <span className="text-xs text-neutral-500 ml-2 tabular-nums">({formatUSD(summary.totalUSD)} USD)</span>
         </div>
-      </div>
+      </button>
+      {open && (
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
@@ -94,6 +110,7 @@ export default function PortfolioTable({ summary }: Props) {
           </tbody>
         </table>
       </div>
+      )}
     </div>
   );
 }
