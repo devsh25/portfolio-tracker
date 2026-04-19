@@ -155,3 +155,11 @@ export function formatQty(qty: number): string {
   if (qty >= 1) return qty.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   return qty.toLocaleString("en-US", { minimumFractionDigits: 4, maximumFractionDigits: 4 });
 }
+
+export function formatPrice(n: number): string {
+  if (!isFinite(n) || n <= 0) return "\u2014";
+  if (n >= 1000) return "$" + n.toLocaleString("en-US", { maximumFractionDigits: 0 });
+  if (n >= 1) return "$" + n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  if (n >= 0.01) return "$" + n.toFixed(3);
+  return "$" + n.toFixed(6);
+}

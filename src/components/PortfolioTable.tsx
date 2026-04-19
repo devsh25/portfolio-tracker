@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { formatUSD, formatCAD, formatQty } from "@/lib/calculations";
+import { formatUSD, formatCAD, formatQty, formatPrice } from "@/lib/calculations";
 import type { OwnerSummary, PortfolioRow } from "@/lib/types";
 
 interface Props {
@@ -75,12 +75,13 @@ export default function PortfolioTable({ summary }: Props) {
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-neutral-800 text-neutral-400 text-[10px] uppercase tracking-widest">
-              <th className="text-left px-5 py-2 font-semibold">Asset</th>
-              <th className="text-left px-5 py-2 font-semibold">Account</th>
-              <th className="text-right px-5 py-2 font-semibold">Qty</th>
-              <th className="text-right px-5 py-2 font-semibold">Value USD</th>
-              <th className="text-right px-5 py-2 font-semibold">Value CAD</th>
+            <tr className="bg-neutral-950/60 border-b border-neutral-800 text-neutral-200 text-xs uppercase tracking-wider">
+              <th className="text-left px-5 py-3 font-bold">Asset</th>
+              <th className="text-left px-5 py-3 font-bold">Account</th>
+              <th className="text-right px-5 py-3 font-bold">Qty</th>
+              <th className="text-right px-5 py-3 font-bold">Price USD</th>
+              <th className="text-right px-5 py-3 font-bold">Value USD</th>
+              <th className="text-right px-5 py-3 font-bold">Value CAD</th>
             </tr>
           </thead>
           <tbody>
@@ -94,16 +95,17 @@ export default function PortfolioTable({ summary }: Props) {
                       <td className="px-5 py-2 font-medium text-neutral-100">{row.accountType === "cash" ? "Cash" : row.asset}</td>
                       <td className="px-5 py-2 text-neutral-400">{row.accountType === "cash" ? row.account : groupName}</td>
                       <td className="px-5 py-2 text-right text-neutral-400 tabular-nums">{formatQty(row.qty)}</td>
+                      <td className="px-5 py-2 text-right text-neutral-400 tabular-nums">{row.qty > 0 ? formatPrice(row.valueUSD / row.qty) : "\u2014"}</td>
                       <td className="px-5 py-2 text-right text-neutral-300 tabular-nums">{formatUSD(row.valueUSD)}</td>
                       <td className="px-5 py-2 text-right text-white tabular-nums">{formatCAD(row.valueCAD)}</td>
                     </tr>
                   ))}
                   <tr className="bg-neutral-900/80 text-xs border-t border-neutral-800">
-                    <td className="px-5 py-1.5 text-neutral-400 uppercase tracking-wider" colSpan={3}>{groupName} Subtotal</td>
+                    <td className="px-5 py-1.5 text-neutral-400 uppercase tracking-wider" colSpan={4}>{groupName} Subtotal</td>
                     <td className="px-5 py-1.5 text-right font-semibold text-neutral-300 tabular-nums">{formatUSD(groupUSD)}</td>
                     <td className="px-5 py-1.5 text-right font-semibold text-neutral-100 tabular-nums">{formatCAD(groupCAD)}</td>
                   </tr>
-                  {gi < groups.size - 1 && <tr><td colSpan={5} className="h-1 bg-neutral-950"></td></tr>}
+                  {gi < groups.size - 1 && <tr><td colSpan={6} className="h-1 bg-neutral-950"></td></tr>}
                 </React.Fragment>
               );
             })}
