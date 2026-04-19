@@ -80,9 +80,9 @@ export default function InsightsPage() {
     return (
       <>
         <Navigation />
-        <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-          <div className="text-center text-gray-400">
-            <div className="animate-spin inline-block w-8 h-8 border-4 border-gray-300 border-t-gray-900 rounded-full mb-4" />
+        <div className="min-h-screen bg-neutral-950 flex items-center justify-center">
+          <div className="text-center text-neutral-500">
+            <div className="animate-spin inline-block w-8 h-8 border-4 border-neutral-800 border-t-white rounded-full mb-4" />
             <p>Loading insights...</p>
           </div>
         </div>
@@ -93,28 +93,30 @@ export default function InsightsPage() {
   return (
     <>
       <Navigation />
-      <main className="min-h-screen bg-gray-50 p-4 md:p-8">
+      <main className="min-h-screen bg-neutral-950 p-4 md:p-8">
         <div className="max-w-7xl mx-auto space-y-6">
           <div className="mb-2">
-            <h1 className="text-2xl font-bold text-gray-900">Portfolio Insights</h1>
-            <p className="text-sm text-gray-500">Analysis including real estate &middot; {holdingsData.lastUpdated}</p>
+            <h1 className="text-2xl font-bold text-white tracking-tight">Portfolio Insights</h1>
+            <p className="text-sm text-neutral-500">Analysis including real estate &middot; {holdingsData.lastUpdated}</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="rounded-xl border-2 border-indigo-500 bg-gradient-to-br from-indigo-600 to-indigo-800 p-5 shadow-md">
+            <div className="rounded-xl border-l-4 border-cyan-400 border-t border-r border-b border-neutral-800 bg-neutral-900 p-5">
               <div className="flex items-center gap-2">
-                <span className="text-xs font-semibold text-indigo-100 uppercase tracking-wider">Liquid Portfolio</span>
-                <span className="text-[10px] px-1.5 py-0.5 rounded bg-indigo-400/30 text-indigo-50 font-medium">ex-Real Estate</span>
+                <span className="text-[11px] font-semibold text-cyan-400 uppercase tracking-widest">Liquid Portfolio</span>
+                <span className="text-[10px] px-1.5 py-0.5 rounded bg-cyan-400/10 text-cyan-300 font-medium">ex-Real Estate</span>
               </div>
-              <div className="text-3xl font-bold text-white mt-1.5">{formatCAD(investableCAD)} <span className="text-sm font-normal text-indigo-200">CAD</span></div>
-              <div className="text-sm text-indigo-200 mt-0.5">{formatUSD(investableUSD)} USD</div>
-              <div className="text-[11px] text-indigo-200/80 mt-2">Stocks, ETFs, crypto, cash</div>
+              <div className="text-3xl font-bold text-cyan-400 mt-2 tabular-nums">{formatCAD(investableCAD)} <span className="text-sm font-normal text-neutral-500">CAD</span></div>
+              <div className="text-sm text-neutral-400 mt-0.5 tabular-nums">{formatUSD(investableUSD)} USD</div>
+              <div className="text-[11px] text-neutral-500 mt-2">Stocks, ETFs, crypto, cash</div>
             </div>
-            <div className="rounded-xl border-2 border-gray-700 bg-gray-900 p-5 shadow-md">
-              <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Grand Total <span className="text-[10px] font-normal normal-case">(incl. real estate)</span></div>
-              <div className="text-3xl font-bold text-white mt-1.5">{formatCAD(totalCAD)} <span className="text-sm font-normal text-gray-400">CAD</span></div>
-              <div className="text-sm text-gray-400 mt-0.5">{formatUSD(totalUSD)} USD</div>
-              <div className="text-[11px] text-gray-400/80 mt-2">Real estate: {formatCAD(realEstateCAD)} CAD</div>
+            <div className="rounded-xl border border-neutral-800 bg-neutral-900 p-5">
+              <div className="text-[11px] font-semibold text-neutral-400 uppercase tracking-widest">
+                Grand Total <span className="text-[10px] font-normal normal-case text-neutral-500">· incl. real estate</span>
+              </div>
+              <div className="text-3xl font-bold text-white mt-2 tabular-nums">{formatCAD(totalCAD)} <span className="text-sm font-normal text-neutral-500">CAD</span></div>
+              <div className="text-sm text-neutral-400 mt-0.5 tabular-nums">{formatUSD(totalUSD)} USD</div>
+              <div className="text-[11px] text-neutral-500 mt-2">Real estate: {formatCAD(realEstateCAD)} CAD</div>
             </div>
           </div>
 
