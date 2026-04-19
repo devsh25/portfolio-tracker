@@ -5,17 +5,17 @@ import holdingsData from "../../../data/holdings.json";
 import { buildPortfolio } from "@/lib/calculations";
 import {
   getAssetAllocation, getEntityTotals, getConcentrationRisk,
-  getCurrencyExposure, getCryptoVsTraditional, getIdleCashAnalysis,
+  getCurrencyExposure, getIdleCashAnalysis,
   getCountryExposure, getRealEstateCAD,
 } from "@/lib/insights";
-import type { HoldingsData, PriceData, OwnerSummary, ChartSlice, EntityTotal, CountryTotal, WhatIfScenario } from "@/lib/types";
+import type { HoldingsData, PriceData, OwnerSummary, ChartSlice, EntityTotal, CountryTotal } from "@/lib/types";
 import { formatCAD, formatUSD } from "@/lib/calculations";
 import Navigation from "@/components/Navigation";
 import AssetAllocation from "@/components/insights/AssetAllocation";
 import OwnerComparison from "@/components/insights/OwnerComparison";
 import ConcentrationRisk from "@/components/insights/ConcentrationRisk";
 import CurrencyExposure from "@/components/insights/CurrencyExposure";
-import CryptoVsTraditional from "@/components/insights/CryptoVsTraditional";
+import PortfolioPerformance from "@/components/insights/PortfolioPerformance";
 import IdleCashAnalysis from "@/components/insights/IdleCashAnalysis";
 import NetWorthTrend from "@/components/insights/NetWorthTrend";
 import LiquidGrowth from "@/components/insights/LiquidGrowth";
@@ -27,7 +27,6 @@ export default function InsightsPage() {
   const [entities, setEntities] = useState<EntityTotal[]>([]);
   const [concentration, setConcentration] = useState<ChartSlice[]>([]);
   const [currency, setCurrency] = useState<ChartSlice[]>([]);
-  const [cryptoVsTrad, setCryptoVsTrad] = useState<{ current: { cryptoCAD: number; traditionalCAD: number; cryptoPct: number }; scenarios: WhatIfScenario[] } | null>(null);
   const [idleCash, setIdleCash] = useState<{ totalCashCAD: number; projections: { years: number; at7pct: number; at10pct: number; at12pct: number }[] } | null>(null);
   const [countryData, setCountryData] = useState<CountryTotal[]>([]);
   const [totalCAD, setTotalCAD] = useState(0);
@@ -62,7 +61,6 @@ export default function InsightsPage() {
       setEntities(getEntityTotals(summaries, holdings, fxRate, inrRate));
       setConcentration(getConcentrationRisk(summaries, holdings, fxRate, inrRate));
       setCurrency(getCurrencyExposure(summaries, holdings, fxRate, inrRate));
-      setCryptoVsTrad(getCryptoVsTraditional(summaries, holdings, fxRate, inrRate));
       setIdleCash(getIdleCashAnalysis(summaries));
       setCountryData(getCountryExposure(summaries, holdings, fxRate, inrRate));
     } catch (e) {
@@ -134,9 +132,7 @@ export default function InsightsPage() {
             <CountryExposureChart data={countryData} />
           </div>
 
-          {cryptoVsTrad && (
-            <CryptoVsTraditional current={cryptoVsTrad.current} scenarios={cryptoVsTrad.scenarios} />
-          )}
+          <PortfolioPerformance />
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {idleCash && (

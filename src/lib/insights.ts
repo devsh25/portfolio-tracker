@@ -1,4 +1,4 @@
-import type { HoldingsData, PriceData, PortfolioRow, OwnerSummary, ChartSlice, EntityTotal, CountryTotal, WhatIfScenario } from "./types";
+import type { HoldingsData, PortfolioRow, OwnerSummary, ChartSlice, EntityTotal, CountryTotal } from "./types";
 import { buildPortfolio } from "./calculations";
 
 const COLORS = {
@@ -254,28 +254,6 @@ export function getCurrencyExposure(
     { name: "CAD", value: cad, color: COLORS.red, percent: (cad / total) * 100 },
     { name: "INR", value: inr, color: COLORS.orange, percent: (inr / total) * 100 },
   ].filter(s => s.value > 0);
-}
-
-// ── 5. Crypto vs Traditional ──
-export function getCryptoVsTraditional(
-  summaries: OwnerSummary[], holdings: HoldingsData, fxRate: number, inrRate: number
-): { current: { cryptoCAD: number; traditionalCAD: number; cryptoPct: number }; scenarios: WhatIfScenario[] } {
-  const allRows = summaries.flatMap(s => s.rows);
-  const cryptoCAD = allRows.filter(r => r.accountType === "crypto").reduce((s, r) => s + r.valueCAD, 0);
-  const cashCAD = allRows.filter(r => r.accountType === "cash").reduce((s, r) => s + r.valueCAD, 0);
-  const questradeCAD = allRows.filter(r => r.accountType === "questrade").reduce((s, r) => s + r.valueCAD, 0);
-  const realEstateCAD = getRealEstateCAD(holdings, fxRate, inrRate);
-  const traditionalCAD = questradeCAD + cashCAD + realEstateCAD;
-  const total = cryptoCAD + traditionalCAD;
-
-  const scenarios: WhatIfScenario[] = [
-    { label: "Current", cryptoCAD, traditionalCAD, totalCAD: total, cryptoPct: (cryptoCAD / total) * 100 },
-    { label: "BTC doubles", cryptoCAD: cryptoCAD * 1.7, traditionalCAD, totalCAD: cryptoCAD * 1.7 + traditionalCAD, cryptoPct: (cryptoCAD * 1.7 / (cryptoCAD * 1.7 + traditionalCAD)) * 100 },
-    { label: "BTC halves", cryptoCAD: cryptoCAD * 0.55, traditionalCAD, totalCAD: cryptoCAD * 0.55 + traditionalCAD, cryptoPct: (cryptoCAD * 0.55 / (cryptoCAD * 0.55 + traditionalCAD)) * 100 },
-    { label: "Crypto to 0", cryptoCAD: 0, traditionalCAD, totalCAD: traditionalCAD, cryptoPct: 0 },
-  ];
-
-  return { current: { cryptoCAD, traditionalCAD, cryptoPct: (cryptoCAD / total) * 100 }, scenarios };
 }
 
 // ── 6. Idle Cash Analysis ──

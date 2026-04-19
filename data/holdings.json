@@ -144,7 +144,7 @@
   "cryptoEntityMapping": {
     "Ledger": ["Dev", "Shalini"],
     "Coinbase": ["Dev", "Shalini"],
-    "Binance": ["Blockwiz"]
+    "Binance": ["Dev"]
   },
   "countryMapping": {
     "ZID.TO": "India",

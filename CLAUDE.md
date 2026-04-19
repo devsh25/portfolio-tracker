@@ -85,10 +85,10 @@ Don't use Feb 2026 PDF statement cash balances - they're stale. Use user-provide
 
 ## Entity Mapping (expanded owners)
 The original 3 owners (Dev, Shalini, Vegrow) are expanded to 5 entities for insights:
-- **Dev** — Personal Questrade (RRSP/TFSA/Cash), Ledger, Coinbase, Dev Scotia, 50% real estate
+- **Dev** — Personal Questrade (RRSP/TFSA/Cash), Ledger, Coinbase, Binance (BNB/TRX), Dev Scotia, 50% real estate
 - **Shalini** — Personal Questrade (RRSP/TFSA/Cash), Shalini Scotia, 50% real estate
 - **Vegrow** — Vegrow Questrade Cash, Vegrow BMO
-- **Blockwiz** — Blockwiz Scotia, Blockwiz Wise, Blockwiz BMO, Binance (BNB/TRX)
+- **Blockwiz** — Blockwiz Scotia, Blockwiz Wise, Blockwiz BMO
 - **Seglitix** — Seglitix BMO
 
 ## Real Estate
