@@ -40,14 +40,20 @@ export default function TopAssets({ summaries, holdings }: Props) {
   }
 
   const items = Object.entries(byAsset)
-    .map(([asset, d]) => ({
-      asset,
-      name: holdings.tickerMeta[asset]?.name || asset,
-      qty: d.qty,
-      valueUSD: d.valueUSD,
-      valueCAD: d.valueCAD,
-      price: d.qty > 0 ? d.valueUSD / d.qty : 0,
-    }))
+    .map(([asset, d]) => {
+      const meta = holdings.tickerMeta[asset];
+      const currency = meta?.currency === "CAD" ? "CAD" : "USD";
+      const nativeValue = currency === "CAD" ? d.valueCAD : d.valueUSD;
+      return {
+        asset,
+        name: meta?.name || asset,
+        qty: d.qty,
+        valueUSD: d.valueUSD,
+        valueCAD: d.valueCAD,
+        price: d.qty > 0 ? nativeValue / d.qty : 0,
+        currency,
+      };
+    })
     .sort((a, b) => b.valueCAD - a.valueCAD)
     .slice(0, 10);
 
@@ -77,7 +83,9 @@ export default function TopAssets({ summaries, holdings }: Props) {
                   </span>
                 )}
               </div>
-              <div className="text-lg font-bold text-cyan-400 tabular-nums mt-1.5">{formatPrice(it.price)}</div>
+              <div className="text-lg font-bold text-cyan-400 tabular-nums mt-1.5">
+                {formatPrice(it.price)} <span className="text-xs font-normal text-neutral-400">{it.currency}</span>
+              </div>
               <div className="text-xs text-neutral-400 tabular-nums">{formatCAD(it.valueCAD)} CAD</div>
               <div className="text-xs text-neutral-400 tabular-nums">{formatUSD(it.valueUSD)} USD</div>
             </div>

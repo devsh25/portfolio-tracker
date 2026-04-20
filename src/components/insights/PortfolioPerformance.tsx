@@ -2,7 +2,14 @@
 
 import { useEffect, useState } from "react";
 import snapshots from "../../../data/snapshots.json";
+import holdingsData from "../../../data/holdings.json";
 import { formatCAD, formatPrice } from "@/lib/calculations";
+
+const tickerMeta = (holdingsData as { tickerMeta: Record<string, { currency: string }> }).tickerMeta;
+
+function tickerCurrency(t: string): "CAD" | "USD" {
+  return tickerMeta[t]?.currency === "CAD" ? "CAD" : "USD";
+}
 
 interface Snapshot {
   timestamp: string;
@@ -148,7 +155,7 @@ export default function PortfolioPerformance() {
                     <div className={`text-base font-bold tabular-nums ${a.pctChange >= 0 ? "text-emerald-400" : "text-red-400"}`}>
                       {a.pctChange >= 0 ? "+" : ""}{a.pctChange.toFixed(1)}%
                     </div>
-                    <div className="text-xs text-neutral-400 tabular-nums">{formatPrice(a.startPrice)} → {formatPrice(a.endPrice)}</div>
+                    <div className="text-xs text-neutral-400 tabular-nums">{formatPrice(a.startPrice)} → {formatPrice(a.endPrice)} {tickerCurrency(a.ticker)}</div>
                   </div>
                 </div>
               ))}
@@ -173,7 +180,7 @@ export default function PortfolioPerformance() {
                     <div className={`text-base font-bold tabular-nums ${a.pctChange >= 0 ? "text-emerald-400" : "text-red-400"}`}>
                       {a.pctChange >= 0 ? "+" : ""}{a.pctChange.toFixed(1)}%
                     </div>
-                    <div className="text-xs text-neutral-400 tabular-nums">{formatPrice(a.startPrice)} → {formatPrice(a.endPrice)}</div>
+                    <div className="text-xs text-neutral-400 tabular-nums">{formatPrice(a.startPrice)} → {formatPrice(a.endPrice)} {tickerCurrency(a.ticker)}</div>
                   </div>
                 </div>
               ))}

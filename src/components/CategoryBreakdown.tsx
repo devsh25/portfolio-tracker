@@ -3,6 +3,9 @@
 import React from "react";
 import { formatUSD, formatCAD, formatQty, formatPrice } from "@/lib/calculations";
 import type { CategorySummary } from "@/lib/types";
+import holdingsData from "../../data/holdings.json";
+
+const tickerMeta = (holdingsData as { tickerMeta: Record<string, { currency: string }> }).tickerMeta;
 
 interface Props {
   categories: CategorySummary[];
@@ -26,7 +29,7 @@ export default function CategoryBreakdown({ categories, grandUSD, grandCAD }: Pr
             <tr className="bg-neutral-950/60 border-b border-neutral-800 text-neutral-200 text-xs uppercase tracking-wider">
               <th className="text-left px-5 py-3 font-bold">Category / Asset</th>
               <th className="text-right px-5 py-3 font-bold">Qty</th>
-              <th className="text-right px-5 py-3 font-bold">Price USD</th>
+              <th className="text-right px-5 py-3 font-bold">Price</th>
               <th className="text-right px-5 py-3 font-bold">Value USD</th>
               <th className="text-right px-5 py-3 font-bold">Value CAD</th>
             </tr>
@@ -47,7 +50,14 @@ export default function CategoryBreakdown({ categories, grandUSD, grandCAD }: Pr
                   <tr key={`${cat.name}-${i}`} className="border-t border-neutral-800/60 hover:bg-neutral-800/40 transition-colors">
                     <td className="px-5 py-1.5 pl-10 text-neutral-400">{item.asset}</td>
                     <td className="px-5 py-1.5 text-right text-neutral-400 tabular-nums">{formatQty(item.qty)}</td>
-                    <td className="px-5 py-1.5 text-right text-neutral-400 tabular-nums">{item.qty > 0 ? formatPrice(item.valueUSD / item.qty) : "\u2014"}</td>
+                    <td className="px-5 py-1.5 text-right text-neutral-300 tabular-nums">
+                      {(() => {
+                        if (item.qty <= 0) return "\u2014";
+                        const currency: "CAD" | "USD" = tickerMeta[item.asset]?.currency === "CAD" ? "CAD" : "USD";
+                        const nativeValue = currency === "CAD" ? item.valueCAD : item.valueUSD;
+                        return <>{formatPrice(nativeValue / item.qty)} <span className="text-neutral-400 text-xs">{currency}</span></>;
+                      })()}
+                    </td>
                     <td className="px-5 py-1.5 text-right text-neutral-300 tabular-nums">{formatUSD(item.valueUSD)}</td>
                     <td className="px-5 py-1.5 text-right text-neutral-100 tabular-nums">{formatCAD(item.valueCAD)}</td>
                   </tr>

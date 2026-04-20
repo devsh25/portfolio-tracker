@@ -3,6 +3,17 @@
 import React, { useState } from "react";
 import { formatUSD, formatCAD, formatQty, formatPrice } from "@/lib/calculations";
 import type { OwnerSummary, PortfolioRow } from "@/lib/types";
+import holdingsData from "../../data/holdings.json";
+
+const tickerMeta = (holdingsData as { tickerMeta: Record<string, { currency: string }> }).tickerMeta;
+
+function rowPrice(row: PortfolioRow): { price: number; currency: "CAD" | "USD" } | null {
+  if (row.qty <= 0) return null;
+  const meta = tickerMeta[row.asset];
+  const currency: "CAD" | "USD" = meta?.currency === "CAD" ? "CAD" : "USD";
+  const nativeValue = currency === "CAD" ? row.valueCAD : row.valueUSD;
+  return { price: nativeValue / row.qty, currency };
+}
 
 interface Props {
   summary: OwnerSummary;
@@ -90,7 +101,7 @@ export default function PortfolioTable({ summary, rank, pctOfTotal }: Props) {
                 <th className="text-left px-5 py-3 font-bold">Asset</th>
                 <th className="text-left px-5 py-3 font-bold">Account</th>
                 <th className="text-right px-5 py-3 font-bold">Qty</th>
-                <th className="text-right px-5 py-3 font-bold">Price USD</th>
+                <th className="text-right px-5 py-3 font-bold">Price</th>
                 <th className="text-right px-5 py-3 font-bold">Value USD</th>
                 <th className="text-right px-5 py-3 font-bold">Value CAD</th>
               </tr>
@@ -106,7 +117,12 @@ export default function PortfolioTable({ summary, rank, pctOfTotal }: Props) {
                         <td className="px-5 py-2 font-medium text-neutral-100">{row.accountType === "cash" ? "Cash" : row.asset}</td>
                         <td className="px-5 py-2 text-neutral-400">{row.accountType === "cash" ? row.account : groupName}</td>
                         <td className="px-5 py-2 text-right text-neutral-400 tabular-nums">{formatQty(row.qty)}</td>
-                        <td className="px-5 py-2 text-right text-neutral-400 tabular-nums">{row.qty > 0 ? formatPrice(row.valueUSD / row.qty) : "\u2014"}</td>
+                        <td className="px-5 py-2 text-right text-neutral-300 tabular-nums">
+                          {(() => {
+                            const p = rowPrice(row);
+                            return p ? <>{formatPrice(p.price)} <span className="text-neutral-400 text-xs">{p.currency}</span></> : "\u2014";
+                          })()}
+                        </td>
                         <td className="px-5 py-2 text-right text-neutral-300 tabular-nums">{formatUSD(row.valueUSD)}</td>
                         <td className="px-5 py-2 text-right text-white tabular-nums">{formatCAD(row.valueCAD)}</td>
                       </tr>
