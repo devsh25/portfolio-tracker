@@ -6,6 +6,7 @@ import { buildPortfolio, buildCategories } from "@/lib/calculations";
 import { getEntityTotals, getRealEstateCAD, getEntitySummaries } from "@/lib/insights";
 import type { HoldingsData, PriceData, OwnerSummary, CategorySummary, EntityTotal } from "@/lib/types";
 import SummaryCards from "@/components/SummaryCards";
+import TopAssets from "@/components/TopAssets";
 import PortfolioTable from "@/components/PortfolioTable";
 import CategoryBreakdown from "@/components/CategoryBreakdown";
 import Navigation from "@/components/Navigation";
@@ -110,6 +111,7 @@ export default function Home() {
               investableUSD={investableUSD}
               investableCAD={investableCAD}
             />
+            <TopAssets summaries={summaries} holdings={holdings} />
             {entitySummaries.map((s, i) => (
               <PortfolioTable
                 key={s.owner}
