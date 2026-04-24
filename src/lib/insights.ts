@@ -259,11 +259,24 @@ export function getCurrencyExposure(
 // ── 6. Idle Cash Analysis ──
 export function getIdleCashAnalysis(summaries: OwnerSummary[]): {
   totalCashCAD: number;
+  breakdown: { owner: string; account: string; valueCAD: number; valueUSD: number }[];
   projections: { years: number; at7pct: number; at10pct: number; at12pct: number }[];
 } {
   const allRows = summaries.flatMap(s => s.rows);
   const totalCashCAD = allRows.filter(r => r.accountType === "cash").reduce((s, r) => s + r.valueCAD, 0)
     + allRows.filter(r => r.asset === "CASH.TO").reduce((s, r) => s + r.valueCAD, 0);
+
+  const breakdown: { owner: string; account: string; valueCAD: number; valueUSD: number }[] = [];
+  for (const s of summaries) {
+    for (const r of s.rows) {
+      if (r.accountType === "cash") {
+        breakdown.push({ owner: s.owner, account: r.account, valueCAD: r.valueCAD, valueUSD: r.valueUSD });
+      } else if (r.asset === "CASH.TO") {
+        breakdown.push({ owner: s.owner, account: "CASH.TO (ETF)", valueCAD: r.valueCAD, valueUSD: r.valueUSD });
+      }
+    }
+  }
+  breakdown.sort((a, b) => b.valueCAD - a.valueCAD);
 
   const projections = [1, 3, 5, 10].map(years => ({
     years,
@@ -272,7 +285,7 @@ export function getIdleCashAnalysis(summaries: OwnerSummary[]): {
     at12pct: totalCashCAD * Math.pow(1.12, years),
   }));
 
-  return { totalCashCAD, projections };
+  return { totalCashCAD, breakdown, projections };
 }
 
 // ── 7. Net Worth Trend (snapshot-based, placeholder data for now) ──

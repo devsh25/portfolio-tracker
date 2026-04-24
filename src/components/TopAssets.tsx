@@ -9,20 +9,32 @@ interface Props {
   holdings: HoldingsData;
 }
 
+type Period = "7d" | "30d" | "3m" | "6m" | "1y" | "ytd";
+
 interface AssetPerformance {
   ticker: string;
-  pctChange: number;
+  changes: Record<Period, number | null>;
 }
 
+const PERIODS: { key: Period; label: string }[] = [
+  { key: "7d", label: "7D" },
+  { key: "30d", label: "30D" },
+  { key: "3m", label: "3M" },
+  { key: "6m", label: "6M" },
+  { key: "1y", label: "1Y" },
+  { key: "ytd", label: "YTD" },
+];
+
 export default function TopAssets({ summaries, holdings }: Props) {
-  const [perfMap, setPerfMap] = useState<Record<string, number>>({});
+  const [perfMap, setPerfMap] = useState<Record<string, AssetPerformance["changes"]>>({});
+  const [period, setPeriod] = useState<Period>("30d");
 
   useEffect(() => {
     fetch("/api/performance")
       .then((r) => r.json())
       .then((d) => {
-        const map: Record<string, number> = {};
-        for (const a of d.data as AssetPerformance[]) map[a.ticker] = a.pctChange;
+        const map: Record<string, AssetPerformance["changes"]> = {};
+        for (const a of d.data as AssetPerformance[]) map[a.ticker] = a.changes;
         setPerfMap(map);
       })
       .catch((e) => console.error("performance fetch failed", e));
@@ -61,11 +73,29 @@ export default function TopAssets({ summaries, holdings }: Props) {
 
   return (
     <div className="mb-8">
-      <h2 className="text-sm font-bold text-neutral-200 uppercase tracking-wider mb-3">Top 10 Assets</h2>
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-3">
+        <h2 className="text-sm font-bold text-neutral-200 uppercase tracking-wider">Top 10 Assets</h2>
+        <div className="inline-flex rounded-lg border border-neutral-800 bg-neutral-900 p-0.5">
+          {PERIODS.map((p) => (
+            <button
+              key={p.key}
+              onClick={() => setPeriod(p.key)}
+              className={`px-3 py-1 text-xs font-semibold rounded-md transition-colors ${
+                period === p.key
+                  ? "bg-white text-neutral-950"
+                  : "text-neutral-400 hover:text-white"
+              }`}
+            >
+              {p.label}
+            </button>
+          ))}
+        </div>
+      </div>
       <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
         {items.map((it) => {
-          const pct = perfMap[it.asset];
-          const hasPerf = pct !== undefined;
+          const changes = perfMap[it.asset];
+          const pct = changes?.[period];
+          const hasPerf = pct != null;
           const positive = hasPerf && pct >= 0;
           return (
             <div

@@ -3,12 +3,20 @@
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts";
 import { formatCAD } from "@/lib/calculations";
 
+interface Breakdown {
+  owner: string;
+  account: string;
+  valueCAD: number;
+  valueUSD: number;
+}
+
 interface Props {
   totalCashCAD: number;
+  breakdown: Breakdown[];
   projections: { years: number; at7pct: number; at10pct: number; at12pct: number }[];
 }
 
-export default function IdleCashAnalysis({ totalCashCAD, projections }: Props) {
+export default function IdleCashAnalysis({ totalCashCAD, breakdown, projections }: Props) {
   const chartData = projections.map(p => ({
     name: `${p.years}Y`,
     "7% (Conservative)": Math.round(p.at7pct),
@@ -32,6 +40,30 @@ export default function IdleCashAnalysis({ totalCashCAD, projections }: Props) {
           <div className="text-xs text-neutral-400 tabular-nums">Could grow to {formatCAD(projections[3]?.at10pct)}</div>
         </div>
       </div>
+
+      {breakdown.length > 0 && (
+        <div className="mb-6">
+          <div className="text-xs font-semibold text-neutral-400 uppercase tracking-widest mb-2">Where the cash is sitting</div>
+          <div className="rounded-lg bg-neutral-950 border border-neutral-800 divide-y divide-neutral-800">
+            {breakdown.map((b, i) => {
+              const pct = totalCashCAD > 0 ? (b.valueCAD / totalCashCAD) * 100 : 0;
+              return (
+                <div key={i} className="flex items-center justify-between p-3">
+                  <div className="min-w-0">
+                    <div className="text-sm font-semibold text-white truncate">{b.account}</div>
+                    <div className="text-xs text-neutral-400">{b.owner}</div>
+                  </div>
+                  <div className="text-right ml-3">
+                    <div className="text-sm font-bold text-white tabular-nums">{formatCAD(b.valueCAD)} <span className="text-xs text-neutral-400 font-normal">CAD</span></div>
+                    <div className="text-xs text-neutral-400 tabular-nums">{pct.toFixed(1)}%</div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
       <div className="h-64">
         <ResponsiveContainer>
           <BarChart data={chartData}>

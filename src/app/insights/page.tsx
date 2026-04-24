@@ -27,7 +27,7 @@ export default function InsightsPage() {
   const [entities, setEntities] = useState<EntityTotal[]>([]);
   const [concentration, setConcentration] = useState<ChartSlice[]>([]);
   const [currency, setCurrency] = useState<ChartSlice[]>([]);
-  const [idleCash, setIdleCash] = useState<{ totalCashCAD: number; projections: { years: number; at7pct: number; at10pct: number; at12pct: number }[] } | null>(null);
+  const [idleCash, setIdleCash] = useState<{ totalCashCAD: number; breakdown: { owner: string; account: string; valueCAD: number; valueUSD: number }[]; projections: { years: number; at7pct: number; at10pct: number; at12pct: number }[] } | null>(null);
   const [countryData, setCountryData] = useState<CountryTotal[]>([]);
   const [totalCAD, setTotalCAD] = useState(0);
   const [totalUSD, setTotalUSD] = useState(0);
@@ -136,7 +136,7 @@ export default function InsightsPage() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {idleCash && (
-              <IdleCashAnalysis totalCashCAD={idleCash.totalCashCAD} projections={idleCash.projections} />
+              <IdleCashAnalysis totalCashCAD={idleCash.totalCashCAD} breakdown={idleCash.breakdown} projections={idleCash.projections} />
             )}
             <NetWorthTrend currentCAD={totalCAD} currentUSD={totalUSD} />
           </div>
