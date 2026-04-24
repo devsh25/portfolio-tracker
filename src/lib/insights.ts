@@ -257,35 +257,62 @@ export function getCurrencyExposure(
 }
 
 // ── 6. Idle Cash Analysis ──
-export function getIdleCashAnalysis(summaries: OwnerSummary[]): {
-  totalCashCAD: number;
-  breakdown: { owner: string; account: string; valueCAD: number; valueUSD: number }[];
-  projections: { years: number; at7pct: number; at10pct: number; at12pct: number }[];
-} {
-  const allRows = summaries.flatMap(s => s.rows);
-  const totalCashCAD = allRows.filter(r => r.accountType === "cash").reduce((s, r) => s + r.valueCAD, 0)
-    + allRows.filter(r => r.asset === "CASH.TO").reduce((s, r) => s + r.valueCAD, 0);
+export type CashType = "Bank" | "Stablecoin" | "ETF";
 
-  const breakdown: { owner: string; account: string; valueCAD: number; valueUSD: number }[] = [];
+export interface CashBreakdown {
+  owner: string;
+  account: string;
+  valueCAD: number;
+  valueUSD: number;
+  currency: "CAD" | "USD";
+  type: CashType;
+}
+
+function detectCashType(account: string, asset: string): CashType {
+  if (asset === "CASH.TO") return "ETF";
+  if (account.startsWith("USDC") || account.startsWith("USDT")) return "Stablecoin";
+  return "Bank";
+}
+
+export function getIdleCashAnalysis(
+  summaries: OwnerSummary[],
+  holdings: HoldingsData
+): {
+  totalCashCAD: number;
+  breakdown: CashBreakdown[];
+} {
+  const breakdown: CashBreakdown[] = [];
+  let totalCashCAD = 0;
+
   for (const s of summaries) {
     for (const r of s.rows) {
       if (r.accountType === "cash") {
-        breakdown.push({ owner: s.owner, account: r.account, valueCAD: r.valueCAD, valueUSD: r.valueUSD });
+        const currency: "CAD" | "USD" = holdings.cashCurrencies[r.account] === "USD" ? "USD" : "CAD";
+        breakdown.push({
+          owner: s.owner,
+          account: r.account,
+          valueCAD: r.valueCAD,
+          valueUSD: r.valueUSD,
+          currency,
+          type: detectCashType(r.account, r.asset),
+        });
+        totalCashCAD += r.valueCAD;
       } else if (r.asset === "CASH.TO") {
-        breakdown.push({ owner: s.owner, account: "CASH.TO (ETF)", valueCAD: r.valueCAD, valueUSD: r.valueUSD });
+        breakdown.push({
+          owner: s.owner,
+          account: "CASH.TO (ETF)",
+          valueCAD: r.valueCAD,
+          valueUSD: r.valueUSD,
+          currency: "CAD",
+          type: "ETF",
+        });
+        totalCashCAD += r.valueCAD;
       }
     }
   }
   breakdown.sort((a, b) => b.valueCAD - a.valueCAD);
 
-  const projections = [1, 3, 5, 10].map(years => ({
-    years,
-    at7pct: totalCashCAD * Math.pow(1.07, years),
-    at10pct: totalCashCAD * Math.pow(1.10, years),
-    at12pct: totalCashCAD * Math.pow(1.12, years),
-  }));
-
-  return { totalCashCAD, breakdown, projections };
+  return { totalCashCAD, breakdown };
 }
 
 // ── 7. Net Worth Trend (snapshot-based, placeholder data for now) ──

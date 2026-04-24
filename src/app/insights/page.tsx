@@ -17,7 +17,6 @@ import ConcentrationRisk from "@/components/insights/ConcentrationRisk";
 import CurrencyExposure from "@/components/insights/CurrencyExposure";
 import PortfolioPerformance from "@/components/insights/PortfolioPerformance";
 import IdleCashAnalysis from "@/components/insights/IdleCashAnalysis";
-import NetWorthTrend from "@/components/insights/NetWorthTrend";
 import LiquidGrowth from "@/components/insights/LiquidGrowth";
 import CountryExposureChart from "@/components/insights/CountryExposure";
 
@@ -27,7 +26,7 @@ export default function InsightsPage() {
   const [entities, setEntities] = useState<EntityTotal[]>([]);
   const [concentration, setConcentration] = useState<ChartSlice[]>([]);
   const [currency, setCurrency] = useState<ChartSlice[]>([]);
-  const [idleCash, setIdleCash] = useState<{ totalCashCAD: number; breakdown: { owner: string; account: string; valueCAD: number; valueUSD: number }[]; projections: { years: number; at7pct: number; at10pct: number; at12pct: number }[] } | null>(null);
+  const [idleCash, setIdleCash] = useState<{ totalCashCAD: number; breakdown: import("@/lib/insights").CashBreakdown[] } | null>(null);
   const [countryData, setCountryData] = useState<CountryTotal[]>([]);
   const [totalCAD, setTotalCAD] = useState(0);
   const [totalUSD, setTotalUSD] = useState(0);
@@ -61,7 +60,7 @@ export default function InsightsPage() {
       setEntities(getEntityTotals(summaries, holdings, fxRate, inrRate));
       setConcentration(getConcentrationRisk(summaries, holdings, fxRate, inrRate));
       setCurrency(getCurrencyExposure(summaries, holdings, fxRate, inrRate));
-      setIdleCash(getIdleCashAnalysis(summaries));
+      setIdleCash(getIdleCashAnalysis(summaries, holdings));
       setCountryData(getCountryExposure(summaries, holdings, fxRate, inrRate));
     } catch (e) {
       console.error("Failed to load insights:", e);
@@ -134,12 +133,13 @@ export default function InsightsPage() {
 
           <PortfolioPerformance />
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {idleCash && (
-              <IdleCashAnalysis totalCashCAD={idleCash.totalCashCAD} breakdown={idleCash.breakdown} projections={idleCash.projections} />
-            )}
-            <NetWorthTrend currentCAD={totalCAD} currentUSD={totalUSD} />
-          </div>
+          {idleCash && (
+            <IdleCashAnalysis
+              totalCashCAD={idleCash.totalCashCAD}
+              breakdown={idleCash.breakdown}
+              liquidCAD={investableCAD}
+            />
+          )}
         </div>
       </main>
     </>
