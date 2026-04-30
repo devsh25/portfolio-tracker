@@ -66,15 +66,14 @@ export default function TopAssets({ summaries, holdings }: Props) {
         currency,
       };
     })
-    .sort((a, b) => b.valueCAD - a.valueCAD)
-    .slice(0, 10);
+    .sort((a, b) => b.valueCAD - a.valueCAD);
 
   if (items.length === 0) return null;
 
   return (
     <div className="mb-8">
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-3">
-        <h2 className="text-sm font-bold text-neutral-200 uppercase tracking-wider">Top 10 Assets</h2>
+        <h2 className="text-sm font-bold text-neutral-200 uppercase tracking-wider">All Holdings ({items.length})</h2>
         <div className="inline-flex rounded-lg border border-neutral-800 bg-neutral-900 p-0.5">
           {PERIODS.map((p) => (
             <button
