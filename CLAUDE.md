@@ -114,9 +114,23 @@ The original 3 owners (Dev, Shalini, Vegrow) are expanded to 5 entities for insi
 8. Country Exposure (bar + cards)
 
 ## How to Update Holdings
-1. Edit `data/holdings.json`
-2. Push to GitHub
-3. Vercel auto-deploys
+
+### Automated (recommended): `npm run sync`
+Run this on Dev's local machine where `~/Claude Folder/personal/Finance/` exists.
+
+1. Update files in `~/Claude Folder/personal/Finance/`:
+   - Drop new bank statement PDFs in `scotia/`, `bmo/`, `wise/`
+   - Drop new banking app screenshots (PNG/JPG) in any of those folders
+   - Replace the Questrade portfolio CSV in `portfolio/Questrade/`
+   - Drop the latest Ledger transaction CSV in `portfolio/crypto/`
+   - Drop new Coinbase CSVs in `portfolio/crypto/coinbase/`
+2. Maintain `~/Claude Folder/personal/Finance/manual.yaml` (copy from `scripts/manual.yaml.example` once). This holds RRSP/TFSA/Cash splits, real-estate values, ticker metadata, entity mappings, and the `bankAccountMap` that resolves "BMO 9037" → "Vegrow BMO". Update splits when share quantities change between accounts.
+3. Set `ANTHROPIC_API_KEY` in your shell.
+4. `npm run sync` — reads files, sends PDFs/images to Claude Sonnet 4.6 (vision), parses CSVs, regenerates `data/holdings.json`. Prints a summary including any unmatched bank records (add those to `bankAccountMap`).
+5. `git add data/holdings.json && git commit && git push` — Vercel auto-deploys.
+
+### Manual fallback
+Edit `data/holdings.json` directly, push to GitHub, Vercel auto-deploys.
 
 ## File Locations (on Dev's machine)
 - Finance data: `~/Claude Folder/personal/Finance/`
