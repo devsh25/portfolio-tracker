@@ -1,11 +1,11 @@
 {
-  "lastUpdated": "2026-04-16",
-  "notes": "Holdings verified April 16, 2026. Questrade from portfolio CSV + live screenshots. Crypto from Ledger/Coinbase/Binance wallet calculations. Bank cash from user-provided balances.",
+  "lastUpdated": "2026-05-02",
+  "notes": "Updated May 2, 2026 from Latest Values folder. Quest values from April 30 screenshots. Bank cash from April 30 statements/screenshots. Crypto unchanged (Ledger CSV April 16). Dev added 13.22 META to Cash account.",
   "owners": {
     "Dev": {
       "questrade": {
         "RRSP": {
-          "GOOG": 61.64,
+          "GOOG": 61.7291,
           "META": 5,
           "MSFT": 8,
           "NFLX": 110,
@@ -16,8 +16,9 @@
           "ZID.TO": 271
         },
         "Cash": {
-          "VFV.TO": 2034,
-          "MSFT": 52.03
+          "VFV.TO": 2039,
+          "MSFT": 52.0339,
+          "META": 13.2193
         }
       },
       "crypto": {
@@ -41,19 +42,19 @@
       "cash": {
         "USDC (Ledger)": 48994.46,
         "USDT (Ledger)": 55.73,
-        "Questrade": 396,
-        "Dev Scotia": 15675,
-        "Blockwiz Scotia": 28981,
-        "Blockwiz Wise": 5508,
-        "Seglitix BMO": 13772,
-        "Blockwiz BMO": 2474
+        "Questrade": 395.91,
+        "Dev Scotia": 5707.29,
+        "Blockwiz Scotia": 28981.66,
+        "Blockwiz Wise": 4212.86,
+        "Seglitix BMO": 15375.36,
+        "Blockwiz BMO": 2474.70
       }
     },
     "Shalini": {
       "questrade": {
         "RRSP": {
-          "GOOG": 37.5,
-          "MSFT": 15,
+          "GOOG": 37.5969,
+          "MSFT": 15.0213,
           "TSLA": 63
         },
         "TFSA": {
@@ -61,14 +62,14 @@
           "ZID.TO": 16
         },
         "Cash": {
-          "VFV.TO": 576,
+          "VFV.TO": 577,
           "ZID.TO": 399
         }
       },
       "crypto": {},
       "cash": {
-        "Questrade": 568,
-        "Shalini Scotia": 5305
+        "Questrade": 568.00,
+        "Shalini Scotia": 4711.35
       }
     },
     "Vegrow": {
@@ -82,7 +83,7 @@
       "crypto": {},
       "cash": {
         "Questrade": 188.68,
-        "Vegrow BMO": 13581
+        "Vegrow BMO": 13581.47
       }
     }
   },
