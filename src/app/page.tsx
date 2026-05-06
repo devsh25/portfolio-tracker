@@ -69,27 +69,23 @@ export default function Home() {
   return (
     <>
     <Navigation />
-    <main className="min-h-screen bg-neutral-950 p-4 md:p-8">
+    <main className="min-h-screen bg-neutral-950 p-3 sm:p-4 md:p-8">
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-2">
-          <div>
-            <h1 className="text-2xl font-bold text-white tracking-tight">Portfolio Tracker</h1>
-            <p className="text-sm text-neutral-400">
-              Holdings as of {holdingsData.lastUpdated} &middot; CAD/USD: {fxRate.toFixed(4)}
+        <div className="flex flex-row justify-between items-start gap-2 mb-4 sm:mb-6">
+          <div className="min-w-0 flex-1">
+            <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight">Portfolio Tracker</h1>
+            <p className="text-[11px] sm:text-sm text-neutral-400 truncate">
+              {holdingsData.lastUpdated} &middot; CAD/USD: {fxRate.toFixed(4)}
+              {lastRefresh && <span className="hidden sm:inline"> &middot; {lastRefresh}</span>}
             </p>
           </div>
-          <div className="flex items-center gap-3">
-            {lastRefresh && (
-              <span className="text-xs text-neutral-400">Last refresh: {lastRefresh}</span>
-            )}
-            <button
-              onClick={fetchPrices}
-              disabled={loading}
-              className="px-3 py-1.5 text-sm bg-white text-neutral-950 rounded-lg hover:bg-neutral-200 disabled:opacity-50 transition-colors font-medium"
-            >
-              {loading ? "Refreshing..." : "Refresh Prices"}
-            </button>
-          </div>
+          <button
+            onClick={fetchPrices}
+            disabled={loading}
+            className="px-2.5 sm:px-3 py-1.5 text-xs sm:text-sm bg-white text-neutral-950 rounded-lg hover:bg-neutral-200 disabled:opacity-50 transition-colors font-medium flex-shrink-0"
+          >
+            {loading ? "Refreshing..." : "Refresh"}
+          </button>
         </div>
 
         {error && (

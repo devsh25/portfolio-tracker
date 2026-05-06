@@ -71,15 +71,15 @@ export default function TopAssets({ summaries, holdings }: Props) {
   if (items.length === 0) return null;
 
   return (
-    <div className="mb-8">
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-3">
+    <div className="mb-6 sm:mb-8">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3">
         <h2 className="text-sm font-bold text-neutral-200 uppercase tracking-wider">All Holdings ({items.length})</h2>
-        <div className="inline-flex rounded-lg border border-neutral-800 bg-neutral-900 p-0.5">
+        <div className="inline-flex rounded-lg border border-neutral-800 bg-neutral-900 p-0.5 overflow-x-auto -mx-1 px-1 sm:mx-0 sm:px-0">
           {PERIODS.map((p) => (
             <button
               key={p.key}
               onClick={() => setPeriod(p.key)}
-              className={`px-3 py-1 text-xs font-semibold rounded-md transition-colors ${
+              className={`px-2.5 sm:px-3 py-1 text-xs font-semibold rounded-md transition-colors whitespace-nowrap ${
                 period === p.key
                   ? "bg-white text-neutral-950"
                   : "text-neutral-400 hover:text-white"
@@ -90,7 +90,7 @@ export default function TopAssets({ summaries, holdings }: Props) {
           ))}
         </div>
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-3">
         {items.map((it) => {
           const changes = perfMap[it.asset];
           const pct = changes?.[period];
@@ -99,24 +99,24 @@ export default function TopAssets({ summaries, holdings }: Props) {
           return (
             <div
               key={it.asset}
-              className="rounded-xl border border-neutral-800 bg-neutral-900 p-3 hover:bg-neutral-800/40 transition-colors"
+              className="rounded-xl border border-neutral-800 bg-neutral-900 p-2.5 sm:p-3 hover:bg-neutral-800/40 transition-colors"
             >
-              <div className="flex justify-between items-start">
+              <div className="flex justify-between items-start gap-1">
                 <div className="min-w-0">
-                  <div className="text-base font-bold text-white truncate">{it.asset}</div>
-                  <div className="text-xs text-neutral-400 truncate">{it.name}</div>
+                  <div className="text-sm sm:text-base font-bold text-white truncate">{it.asset}</div>
+                  <div className="text-[10px] sm:text-xs text-neutral-400 truncate">{it.name}</div>
                 </div>
                 {hasPerf && (
-                  <span className={`text-xs font-bold tabular-nums ${positive ? "text-emerald-400" : "text-red-400"} flex-shrink-0 ml-1`}>
+                  <span className={`text-[10px] sm:text-xs font-bold tabular-nums ${positive ? "text-emerald-400" : "text-red-400"} flex-shrink-0`}>
                     {positive ? "+" : ""}{pct.toFixed(1)}%
                   </span>
                 )}
               </div>
-              <div className="text-lg font-bold text-cyan-400 tabular-nums mt-1.5">
-                {formatPrice(it.price)} <span className="text-xs font-normal text-neutral-400">{it.currency}</span>
+              <div className="text-base sm:text-lg font-bold text-cyan-400 tabular-nums mt-1 sm:mt-1.5">
+                {formatPrice(it.price)} <span className="text-[10px] sm:text-xs font-normal text-neutral-400">{it.currency}</span>
               </div>
-              <div className="text-xs text-neutral-400 tabular-nums">{formatCAD(it.valueCAD)} CAD</div>
-              <div className="text-xs text-neutral-400 tabular-nums">{formatUSD(it.valueUSD)} USD</div>
+              <div className="text-[11px] sm:text-xs text-neutral-400 tabular-nums">{formatCAD(it.valueCAD)} CAD</div>
+              <div className="text-[10px] sm:text-xs text-neutral-400 tabular-nums">{formatUSD(it.valueUSD)} USD</div>
             </div>
           );
         })}

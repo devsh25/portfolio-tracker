@@ -66,79 +66,149 @@ export default function PortfolioTable({ summary, rank, pctOfTotal }: Props) {
   };
 
   return (
-    <div className={`mb-4 rounded-xl border border-neutral-800 bg-neutral-900 overflow-hidden`}>
+    <div className={`mb-3 sm:mb-4 rounded-xl border border-neutral-800 bg-neutral-900 overflow-hidden`}>
+      {/* Header — mobile: stacked, desktop: grid */}
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        className={`w-full px-5 py-4 border-l-4 ${accent.border} ${accent.bg} ${open ? "border-b border-neutral-800" : ""} grid grid-cols-[44px_1fr_1fr_auto] gap-4 items-center hover:bg-neutral-800/30 transition-colors text-left`}
+        className={`w-full px-3 sm:px-5 py-3 sm:py-4 border-l-4 ${accent.border} ${accent.bg} ${open ? "border-b border-neutral-800" : ""} hover:bg-neutral-800/30 transition-colors text-left`}
       >
-        <div className={`text-3xl font-bold ${accent.num} tabular-nums`}>{rank}</div>
-        <div className="flex items-center gap-3 min-w-0">
-          <svg
-            className={`w-4 h-4 text-neutral-400 transition-transform flex-shrink-0 ${open ? "rotate-90" : ""}`}
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
-          </svg>
-          <div>
-            <div className="text-base font-semibold text-white">{summary.owner}</div>
-            <div className="text-xs text-neutral-400 tabular-nums">{pctOfTotal.toFixed(1)}% of total</div>
+        {/* Mobile layout */}
+        <div className="sm:hidden">
+          <div className="flex items-start justify-between gap-2">
+            <div className="flex items-center gap-2 min-w-0 flex-1">
+              <span className={`text-2xl font-bold ${accent.num} tabular-nums leading-none flex-shrink-0`}>{rank}</span>
+              <svg
+                className={`w-3.5 h-3.5 text-neutral-400 transition-transform flex-shrink-0 ${open ? "rotate-90" : ""}`}
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+              </svg>
+              <div className="min-w-0">
+                <div className="text-base font-semibold text-white truncate">{summary.owner}</div>
+                <div className="text-[10px] text-neutral-400 tabular-nums">{pctOfTotal.toFixed(1)}% of total</div>
+              </div>
+            </div>
+            <div className="text-right flex-shrink-0">
+              <div className={`text-lg font-bold ${accent.value} tabular-nums leading-tight`}>{formatCAD(summary.totalCAD)}</div>
+              <div className="text-[10px] text-neutral-400 tabular-nums">{formatUSD(summary.totalUSD)} USD</div>
+            </div>
           </div>
         </div>
-        <div className={`text-right text-2xl font-bold ${accent.value} tabular-nums`}>{formatCAD(summary.totalCAD)}</div>
-        <div className="text-right min-w-[110px]">
-          <div className="text-base font-semibold text-neutral-300 tabular-nums">{formatUSD(summary.totalUSD)}</div>
-          <div className="text-xs text-neutral-400 uppercase tracking-wider">USD</div>
+        {/* Desktop layout */}
+        <div className="hidden sm:grid grid-cols-[44px_1fr_1fr_auto] gap-4 items-center">
+          <div className={`text-3xl font-bold ${accent.num} tabular-nums`}>{rank}</div>
+          <div className="flex items-center gap-3 min-w-0">
+            <svg
+              className={`w-4 h-4 text-neutral-400 transition-transform flex-shrink-0 ${open ? "rotate-90" : ""}`}
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+            </svg>
+            <div>
+              <div className="text-base font-semibold text-white">{summary.owner}</div>
+              <div className="text-xs text-neutral-400 tabular-nums">{pctOfTotal.toFixed(1)}% of total</div>
+            </div>
+          </div>
+          <div className={`text-right text-2xl font-bold ${accent.value} tabular-nums`}>{formatCAD(summary.totalCAD)}</div>
+          <div className="text-right min-w-[110px]">
+            <div className="text-base font-semibold text-neutral-300 tabular-nums">{formatUSD(summary.totalUSD)}</div>
+            <div className="text-xs text-neutral-400 uppercase tracking-wider">USD</div>
+          </div>
         </div>
       </button>
+
       {open && (
-        <div className="overflow-x-auto">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="bg-neutral-950/60 border-b border-neutral-800 text-neutral-200 text-xs uppercase tracking-wider">
-                <th className="text-left px-5 py-3 font-bold">Asset</th>
-                <th className="text-left px-5 py-3 font-bold">Account</th>
-                <th className="text-right px-5 py-3 font-bold">Qty</th>
-                <th className="text-right px-5 py-3 font-bold">Price</th>
-                <th className="text-right px-5 py-3 font-bold">Value USD</th>
-                <th className="text-right px-5 py-3 font-bold">Value CAD</th>
-              </tr>
-            </thead>
-            <tbody>
-              {Array.from(groups.entries()).map(([groupName, rows], gi) => {
-                const groupUSD = rows.reduce((s, r) => s + r.valueUSD, 0);
-                const groupCAD = rows.reduce((s, r) => s + r.valueCAD, 0);
-                return (
-                  <React.Fragment key={groupName}>
-                    {rows.map((row, ri) => (
-                      <tr key={`${groupName}-${ri}`} className="border-t border-neutral-800/60 hover:bg-neutral-800/40 transition-colors">
-                        <td className="px-5 py-2 font-medium text-neutral-100">{row.accountType === "cash" ? "Cash" : row.asset}</td>
-                        <td className="px-5 py-2 text-neutral-400">{row.accountType === "cash" ? row.account : groupName}</td>
-                        <td className="px-5 py-2 text-right text-neutral-400 tabular-nums">{formatQty(row.qty)}</td>
-                        <td className="px-5 py-2 text-right text-neutral-300 tabular-nums">
-                          {(() => {
-                            const p = rowPrice(row);
-                            return p ? <>{formatPrice(p.price)} <span className="text-neutral-400 text-xs">{p.currency}</span></> : "\u2014";
-                          })()}
-                        </td>
-                        <td className="px-5 py-2 text-right text-neutral-300 tabular-nums">{formatUSD(row.valueUSD)}</td>
-                        <td className="px-5 py-2 text-right text-white tabular-nums">{formatCAD(row.valueCAD)}</td>
+        <>
+          {/* Mobile: card list */}
+          <div className="sm:hidden divide-y divide-neutral-800/60">
+            {Array.from(groups.entries()).map(([groupName, rows]) => {
+              const groupCAD = rows.reduce((s, r) => s + r.valueCAD, 0);
+              return (
+                <div key={groupName}>
+                  <div className="bg-neutral-950/60 px-3 py-1.5 text-[10px] uppercase tracking-wider text-neutral-400 flex justify-between items-center">
+                    <span>{groupName}</span>
+                    <span className="tabular-nums text-neutral-200 font-semibold">{formatCAD(groupCAD)}</span>
+                  </div>
+                  {rows.map((row, ri) => {
+                    const p = rowPrice(row);
+                    return (
+                      <div key={`${groupName}-${ri}`} className="px-3 py-2.5 flex justify-between items-center gap-3">
+                        <div className="min-w-0 flex-1">
+                          <div className="text-sm font-semibold text-neutral-100 truncate">
+                            {row.accountType === "cash" ? row.account : row.asset}
+                          </div>
+                          <div className="text-[11px] text-neutral-400 tabular-nums">
+                            {row.accountType !== "cash" && row.qty > 0 && (
+                              <>
+                                {formatQty(row.qty)}
+                                {p && <> · {formatPrice(p.price)} {p.currency}</>}
+                              </>
+                            )}
+                          </div>
+                        </div>
+                        <div className="text-right flex-shrink-0">
+                          <div className="text-sm font-semibold text-white tabular-nums">{formatCAD(row.valueCAD)}</div>
+                          <div className="text-[10px] text-neutral-400 tabular-nums">{formatUSD(row.valueUSD)} USD</div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Desktop: full table */}
+          <div className="hidden sm:block overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="bg-neutral-950/60 border-b border-neutral-800 text-neutral-200 text-xs uppercase tracking-wider">
+                  <th className="text-left px-5 py-3 font-bold">Asset</th>
+                  <th className="text-left px-5 py-3 font-bold">Account</th>
+                  <th className="text-right px-5 py-3 font-bold">Qty</th>
+                  <th className="text-right px-5 py-3 font-bold">Price</th>
+                  <th className="text-right px-5 py-3 font-bold">Value USD</th>
+                  <th className="text-right px-5 py-3 font-bold">Value CAD</th>
+                </tr>
+              </thead>
+              <tbody>
+                {Array.from(groups.entries()).map(([groupName, rows], gi) => {
+                  const groupUSD = rows.reduce((s, r) => s + r.valueUSD, 0);
+                  const groupCAD = rows.reduce((s, r) => s + r.valueCAD, 0);
+                  return (
+                    <React.Fragment key={groupName}>
+                      {rows.map((row, ri) => (
+                        <tr key={`${groupName}-${ri}`} className="border-t border-neutral-800/60 hover:bg-neutral-800/40 transition-colors">
+                          <td className="px-5 py-2 font-medium text-neutral-100">{row.accountType === "cash" ? "Cash" : row.asset}</td>
+                          <td className="px-5 py-2 text-neutral-400">{row.accountType === "cash" ? row.account : groupName}</td>
+                          <td className="px-5 py-2 text-right text-neutral-400 tabular-nums">{formatQty(row.qty)}</td>
+                          <td className="px-5 py-2 text-right text-neutral-300 tabular-nums">
+                            {(() => {
+                              const p = rowPrice(row);
+                              return p ? <>{formatPrice(p.price)} <span className="text-neutral-400 text-xs">{p.currency}</span></> : "—";
+                            })()}
+                          </td>
+                          <td className="px-5 py-2 text-right text-neutral-300 tabular-nums">{formatUSD(row.valueUSD)}</td>
+                          <td className="px-5 py-2 text-right text-white tabular-nums">{formatCAD(row.valueCAD)}</td>
+                        </tr>
+                      ))}
+                      <tr className="bg-neutral-900/80 text-xs border-t border-neutral-800">
+                        <td className="px-5 py-1.5 text-neutral-400 uppercase tracking-wider" colSpan={4}>{groupName} Subtotal</td>
+                        <td className="px-5 py-1.5 text-right font-semibold text-neutral-300 tabular-nums">{formatUSD(groupUSD)}</td>
+                        <td className="px-5 py-1.5 text-right font-semibold text-neutral-100 tabular-nums">{formatCAD(groupCAD)}</td>
                       </tr>
-                    ))}
-                    <tr className="bg-neutral-900/80 text-xs border-t border-neutral-800">
-                      <td className="px-5 py-1.5 text-neutral-400 uppercase tracking-wider" colSpan={4}>{groupName} Subtotal</td>
-                      <td className="px-5 py-1.5 text-right font-semibold text-neutral-300 tabular-nums">{formatUSD(groupUSD)}</td>
-                      <td className="px-5 py-1.5 text-right font-semibold text-neutral-100 tabular-nums">{formatCAD(groupCAD)}</td>
-                    </tr>
-                    {gi < groups.size - 1 && <tr><td colSpan={6} className="h-1 bg-neutral-950"></td></tr>}
-                  </React.Fragment>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
+                      {gi < groups.size - 1 && <tr><td colSpan={6} className="h-1 bg-neutral-950"></td></tr>}
+                    </React.Fragment>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </>
       )}
     </div>
   );

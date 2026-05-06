@@ -23,7 +23,55 @@ export default function CategoryBreakdown({ categories, grandUSD, grandCAD }: Pr
   return (
     <div className="mb-8">
       <h2 className="text-sm font-bold text-neutral-200 uppercase tracking-wider mb-3">By Category</h2>
-      <div className="rounded-xl border border-neutral-800 bg-neutral-900 overflow-hidden">
+
+      {/* Mobile: card list */}
+      <div className="sm:hidden space-y-3">
+        {categories.map((cat) => (
+          <div key={cat.name} className="rounded-xl border border-neutral-800 bg-neutral-900 overflow-hidden">
+            <div className="bg-neutral-800/60 px-3 py-2.5 flex justify-between items-center">
+              <div className="flex items-center gap-2 min-w-0">
+                <span className={`inline-block w-2 h-2 rounded-full flex-shrink-0 ${CAT_DOT[cat.name] || "bg-neutral-500"}`}></span>
+                <span className="text-sm font-semibold text-white truncate">{cat.name}</span>
+              </div>
+              <div className="text-right flex-shrink-0">
+                <div className="text-sm font-bold text-white tabular-nums">{formatCAD(cat.totalCAD)}</div>
+                <div className="text-[10px] text-neutral-400 tabular-nums">{formatUSD(cat.totalUSD)} USD</div>
+              </div>
+            </div>
+            <div className="divide-y divide-neutral-800/60">
+              {cat.items.map((item, i) => {
+                const currency: "CAD" | "USD" = tickerMeta[item.asset]?.currency === "CAD" ? "CAD" : "USD";
+                const nativeValue = currency === "CAD" ? item.valueCAD : item.valueUSD;
+                const price = item.qty > 0 ? nativeValue / item.qty : 0;
+                return (
+                  <div key={`${cat.name}-${i}`} className="px-3 py-2 flex justify-between items-center gap-2">
+                    <div className="min-w-0 flex-1">
+                      <div className="text-sm text-neutral-200 truncate">{item.asset}</div>
+                      <div className="text-[11px] text-neutral-400 tabular-nums">
+                        {item.qty > 0 && <>{formatQty(item.qty)} · {formatPrice(price)} {currency}</>}
+                      </div>
+                    </div>
+                    <div className="text-right flex-shrink-0">
+                      <div className="text-sm text-neutral-100 tabular-nums">{formatCAD(item.valueCAD)}</div>
+                      <div className="text-[10px] text-neutral-400 tabular-nums">{formatUSD(item.valueUSD)} USD</div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        ))}
+        <div className="rounded-xl border border-neutral-800 bg-neutral-950 px-3 py-3 flex justify-between items-center">
+          <span className="text-xs uppercase tracking-wider text-white font-bold">Grand Total</span>
+          <div className="text-right">
+            <div className="text-base font-bold text-white tabular-nums">{formatCAD(grandCAD)}</div>
+            <div className="text-[10px] text-neutral-400 tabular-nums">{formatUSD(grandUSD)} USD</div>
+          </div>
+        </div>
+      </div>
+
+      {/* Desktop: full table */}
+      <div className="hidden sm:block rounded-xl border border-neutral-800 bg-neutral-900 overflow-hidden">
         <table className="w-full text-sm">
           <thead>
             <tr className="bg-neutral-950/60 border-b border-neutral-800 text-neutral-200 text-xs uppercase tracking-wider">
@@ -52,7 +100,7 @@ export default function CategoryBreakdown({ categories, grandUSD, grandCAD }: Pr
                     <td className="px-5 py-1.5 text-right text-neutral-400 tabular-nums">{formatQty(item.qty)}</td>
                     <td className="px-5 py-1.5 text-right text-neutral-300 tabular-nums">
                       {(() => {
-                        if (item.qty <= 0) return "\u2014";
+                        if (item.qty <= 0) return "—";
                         const currency: "CAD" | "USD" = tickerMeta[item.asset]?.currency === "CAD" ? "CAD" : "USD";
                         const nativeValue = currency === "CAD" ? item.valueCAD : item.valueUSD;
                         return <>{formatPrice(nativeValue / item.qty)} <span className="text-neutral-400 text-xs">{currency}</span></>;
