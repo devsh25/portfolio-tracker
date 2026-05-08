@@ -2,11 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { formatUSD, formatCAD, formatPrice } from "@/lib/calculations";
-import type { HoldingsData, OwnerSummary } from "@/lib/types";
+import type { HoldingsData, OwnerSummary, PriceData } from "@/lib/types";
 
 interface Props {
   summaries: OwnerSummary[];
   holdings: HoldingsData;
+  prices: PriceData;
 }
 
 type Period = "7d" | "30d" | "3m" | "6m" | "1y" | "ytd";
@@ -25,7 +26,7 @@ const PERIODS: { key: Period; label: string }[] = [
   { key: "ytd", label: "YTD" },
 ];
 
-export default function TopAssets({ summaries, holdings }: Props) {
+export default function TopAssets({ summaries, holdings, prices }: Props) {
   const [perfMap, setPerfMap] = useState<Record<string, AssetPerformance["changes"]>>({});
   const [period, setPeriod] = useState<Period>("30d");
 
@@ -56,13 +57,14 @@ export default function TopAssets({ summaries, holdings }: Props) {
       const meta = holdings.tickerMeta[asset];
       const currency = meta?.currency === "CAD" ? "CAD" : "USD";
       const nativeValue = currency === "CAD" ? d.valueCAD : d.valueUSD;
+      const livePrice = prices[asset]?.price ?? 0;
       return {
         asset,
         name: meta?.name || asset,
         qty: d.qty,
         valueUSD: d.valueUSD,
         valueCAD: d.valueCAD,
-        price: d.qty > 0 ? nativeValue / d.qty : 0,
+        price: d.qty > 0 ? nativeValue / d.qty : livePrice,
         currency,
       };
     })
@@ -115,8 +117,8 @@ export default function TopAssets({ summaries, holdings }: Props) {
               <div className="text-base sm:text-lg font-bold text-cyan-400 tabular-nums mt-1 sm:mt-1.5">
                 {formatPrice(it.price)} <span className="text-[10px] sm:text-xs font-normal text-neutral-400">{it.currency}</span>
               </div>
-              <div className="text-[11px] sm:text-xs text-neutral-400 tabular-nums">{formatCAD(it.valueCAD)} CAD</div>
-              <div className="text-[10px] sm:text-xs text-neutral-400 tabular-nums">{formatUSD(it.valueUSD)} USD</div>
+              <div className="text-[11px] sm:text-xs text-neutral-400 tabular-nums">{it.qty > 0 ? `${formatCAD(it.valueCAD)} CAD` : "Watchlist"}</div>
+              <div className="text-[10px] sm:text-xs text-neutral-400 tabular-nums">{it.qty > 0 ? `${formatUSD(it.valueUSD)} USD` : "—"}</div>
             </div>
           );
         })}

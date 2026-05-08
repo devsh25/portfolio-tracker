@@ -19,6 +19,9 @@
           "VFV.TO": 2039,
           "MSFT": 52.0339,
           "META": 13.2193
+        },
+        "Watchlist": {
+          "GOLD": 0
         }
       },
       "crypto": {
@@ -104,7 +107,8 @@
     "LTC": { "name": "Litecoin", "currency": "USD", "yahoo": "LTC-USD" },
     "TRX": { "name": "TRON", "currency": "USD", "yahoo": "TRX-USD" },
     "MANA": { "name": "Decentraland", "currency": "USD", "yahoo": "MANA-USD" },
-    "SAND": { "name": "The Sandbox", "currency": "USD", "yahoo": "SAND-USD" }
+    "SAND": { "name": "The Sandbox", "currency": "USD", "yahoo": "SAND-USD" },
+    "GOLD": { "name": "Gold (Spot)", "currency": "USD", "yahoo": "GC=F" }
   },
   "cashCurrencies": {
     "USDC (Ledger)": "USD",
@@ -164,6 +168,7 @@
     "LTC": "Global",
     "TRX": "Global",
     "MANA": "Global",
-    "SAND": "Global"
+    "SAND": "Global",
+    "GOLD": "Global"
   }
 }

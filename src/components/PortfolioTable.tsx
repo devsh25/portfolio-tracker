@@ -26,6 +26,7 @@ function groupRows(rows: PortfolioRow[]): Map<string, PortfolioRow[]> {
   const order: string[] = [];
 
   for (const row of rows) {
+    if (row.accountType === "questrade" && row.qty <= 0) continue;
     let groupKey: string;
     if (row.accountType === "questrade") {
       groupKey = row.account;

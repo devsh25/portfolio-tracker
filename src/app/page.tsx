@@ -17,6 +17,7 @@ export default function Home() {
   const [categories, setCategories] = useState<CategorySummary[]>([]);
   const [realEstateCAD, setRealEstateCAD] = useState(0);
   const [fxRate, setFxRate] = useState(1.373);
+  const [livePrices, setLivePrices] = useState<PriceData>({});
   const [lastRefresh, setLastRefresh] = useState<string>("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -42,6 +43,7 @@ export default function Home() {
       setEntities(ents);
       setCategories(cats);
       setRealEstateCAD(reCAD);
+      setLivePrices(prices);
       setLastRefresh(new Date().toLocaleTimeString());
       setError(null);
     } catch (e) {
@@ -107,7 +109,7 @@ export default function Home() {
               investableUSD={investableUSD}
               investableCAD={investableCAD}
             />
-            <TopAssets summaries={summaries} holdings={holdings} />
+            <TopAssets summaries={summaries} holdings={holdings} prices={livePrices} />
             {entitySummaries.map((s, i) => (
               <PortfolioTable
                 key={s.owner}
