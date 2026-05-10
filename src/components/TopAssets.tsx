@@ -52,6 +52,11 @@ export default function TopAssets({ summaries, holdings, prices }: Props) {
     }
   }
 
+  // Watchlist: any tickerMeta entry not held in the portfolio shows as a price-only tile.
+  for (const ticker of Object.keys(holdings.tickerMeta)) {
+    if (!byAsset[ticker]) byAsset[ticker] = { qty: 0, valueUSD: 0, valueCAD: 0 };
+  }
+
   const items = Object.entries(byAsset)
     .map(([asset, d]) => {
       const meta = holdings.tickerMeta[asset];
