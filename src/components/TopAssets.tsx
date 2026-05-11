@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { formatUSD, formatCAD, formatPrice } from "@/lib/calculations";
-import type { HoldingsData, OwnerSummary } from "@/lib/types";
+import type { HoldingsData, OwnerSummary, PriceData } from "@/lib/types";
 
 interface Props {
   summaries: OwnerSummary[];
@@ -27,6 +27,7 @@ const PERIODS: { key: Period; label: string }[] = [
 
 export default function TopAssets({ summaries, holdings }: Props) {
   const [perfMap, setPerfMap] = useState<Record<string, AssetPerformance["changes"]>>({});
+  const [priceMap, setPriceMap] = useState<PriceData>({});
   const [period, setPeriod] = useState<Period>("30d");
 
   useEffect(() => {
@@ -38,6 +39,11 @@ export default function TopAssets({ summaries, holdings }: Props) {
         setPerfMap(map);
       })
       .catch((e) => console.error("performance fetch failed", e));
+
+    fetch("/api/prices")
+      .then((r) => r.json())
+      .then((d) => setPriceMap(d.prices || {}))
+      .catch((e) => console.error("prices fetch failed", e));
   }, []);
 
   const byAsset: Record<string, { qty: number; valueUSD: number; valueCAD: number }> = {};
@@ -64,11 +70,34 @@ export default function TopAssets({ summaries, holdings }: Props) {
         valueCAD: d.valueCAD,
         price: d.qty > 0 ? nativeValue / d.qty : 0,
         currency,
+        watch: false,
       };
     })
     .sort((a, b) => b.valueCAD - a.valueCAD);
 
-  if (items.length === 0) return null;
+  // Watchlist tickers (not owned — tracked for reference)
+  const watchItems = (holdings.watchlist || [])
+    .map((ticker) => {
+      const meta = holdings.tickerMeta[ticker];
+      const priceInfo = priceMap[ticker];
+      if (!meta || !priceInfo) return null;
+      const currency = meta.currency === "CAD" ? "CAD" : "USD";
+      return {
+        asset: ticker,
+        name: meta.name,
+        qty: 0,
+        valueUSD: 0,
+        valueCAD: 0,
+        price: priceInfo.price,
+        currency,
+        watch: true,
+      };
+    })
+    .filter((x): x is NonNullable<typeof x> => x !== null);
+
+  const allItems = [...items, ...watchItems];
+
+  if (allItems.length === 0) return null;
 
   return (
     <div className="mb-6 sm:mb-8">
@@ -91,7 +120,7 @@ export default function TopAssets({ summaries, holdings }: Props) {
         </div>
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-3">
-        {items.map((it) => {
+        {allItems.map((it) => {
           const changes = perfMap[it.asset];
           const pct = changes?.[period];
           const hasPerf = pct != null;
@@ -99,11 +128,20 @@ export default function TopAssets({ summaries, holdings }: Props) {
           return (
             <div
               key={it.asset}
-              className="rounded-xl border border-neutral-800 bg-neutral-900 p-2.5 sm:p-3 hover:bg-neutral-800/40 transition-colors"
+              className={`rounded-xl border bg-neutral-900 p-2.5 sm:p-3 hover:bg-neutral-800/40 transition-colors ${
+                it.watch ? "border-amber-400/40 border-dashed" : "border-neutral-800"
+              }`}
             >
               <div className="flex justify-between items-start gap-1">
                 <div className="min-w-0">
-                  <div className="text-sm sm:text-base font-bold text-white truncate">{it.asset}</div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-sm sm:text-base font-bold text-white truncate">{it.asset}</span>
+                    {it.watch && (
+                      <span className="text-[9px] sm:text-[10px] font-semibold px-1 py-0.5 rounded bg-amber-400/15 text-amber-400 uppercase tracking-wider flex-shrink-0">
+                        Watch
+                      </span>
+                    )}
+                  </div>
                   <div className="text-[10px] sm:text-xs text-neutral-400 truncate">{it.name}</div>
                 </div>
                 {hasPerf && (
@@ -112,11 +150,17 @@ export default function TopAssets({ summaries, holdings }: Props) {
                   </span>
                 )}
               </div>
-              <div className="text-base sm:text-lg font-bold text-cyan-400 tabular-nums mt-1 sm:mt-1.5">
+              <div className={`text-base sm:text-lg font-bold tabular-nums mt-1 sm:mt-1.5 ${it.watch ? "text-amber-400" : "text-cyan-400"}`}>
                 {formatPrice(it.price)} <span className="text-[10px] sm:text-xs font-normal text-neutral-400">{it.currency}</span>
               </div>
-              <div className="text-[11px] sm:text-xs text-neutral-400 tabular-nums">{formatCAD(it.valueCAD)} CAD</div>
-              <div className="text-[10px] sm:text-xs text-neutral-400 tabular-nums">{formatUSD(it.valueUSD)} USD</div>
+              {it.watch ? (
+                <div className="text-[11px] sm:text-xs text-neutral-500 italic">Not held · tracked</div>
+              ) : (
+                <>
+                  <div className="text-[11px] sm:text-xs text-neutral-400 tabular-nums">{formatCAD(it.valueCAD)} CAD</div>
+                  <div className="text-[10px] sm:text-xs text-neutral-400 tabular-nums">{formatUSD(it.valueUSD)} USD</div>
+                </>
+              )}
             </div>
           );
         })}

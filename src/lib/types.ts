@@ -21,6 +21,7 @@ export interface HoldingsData {
   entityMapping: Record<string, string>;
   cryptoEntityMapping: Record<string, string | string[]>;
   countryMapping: Record<string, string>;
+  watchlist?: string[];
 }
 
 export interface OwnerData {

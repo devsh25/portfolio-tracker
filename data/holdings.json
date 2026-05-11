@@ -104,8 +104,10 @@
     "LTC": { "name": "Litecoin", "currency": "USD", "yahoo": "LTC-USD" },
     "TRX": { "name": "TRON", "currency": "USD", "yahoo": "TRX-USD" },
     "MANA": { "name": "Decentraland", "currency": "USD", "yahoo": "MANA-USD" },
-    "SAND": { "name": "The Sandbox", "currency": "USD", "yahoo": "SAND-USD" }
+    "SAND": { "name": "The Sandbox", "currency": "USD", "yahoo": "SAND-USD" },
+    "GOLD": { "name": "Gold (per oz)", "currency": "USD", "yahoo": "GC=F" }
   },
+  "watchlist": ["GOLD"],
   "cashCurrencies": {
     "USDC (Ledger)": "USD",
     "USDT (Ledger)": "USD",
