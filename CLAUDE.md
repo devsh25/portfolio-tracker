@@ -1,5 +1,17 @@
 # Portfolio Tracker - Claude Context
 
+## CRITICAL: Sync rule — read this first, every session
+
+Dev edits this repo from both **mobile (Claude sessions)** and **laptop (direct git)**. `main` on GitHub is the single source of truth; Vercel auto-deploys it. Before ANY edit:
+
+1. **Fetch and inspect `main` first.** Run `git fetch origin main` and review `git log origin/main -20` to see what the laptop (or a previous mobile session) has pushed. NEVER assume the local working copy is up to date.
+2. **Branch off the latest `origin/main`**, not whatever HEAD happens to be.
+3. **Check if the feature already exists on main** before implementing. The laptop may have already added the thing the user is asking about, in which case the right action is to point that out (and fix/refresh, not reimplement).
+4. **Never push to a stale designated branch without rebasing onto `origin/main` first.** If the assigned branch has diverged from main, reset it to main before adding new commits.
+5. **Always open a PR targeting `main`** and offer to merge it (or set auto-merge if enabled) so both devices converge.
+
+This rule must NEVER be ignored. Skipping it causes duplicate/conflicting implementations that the user then has to untangle.
+
 ## What This Is
 A personal portfolio tracker for Dev Sharma's household investments across Questrade, crypto wallets, and bank accounts. Deployed on Vercel with live Yahoo Finance prices.
 
