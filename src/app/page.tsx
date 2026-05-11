@@ -75,8 +75,8 @@ export default function Home() {
           <div className="min-w-0 flex-1">
             <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight">Portfolio Tracker</h1>
             <p className="text-[11px] sm:text-sm text-neutral-400 truncate">
-              {holdingsData.lastUpdated} &middot; CAD/USD: {fxRate.toFixed(4)}
-              {lastRefresh && <span className="hidden sm:inline"> &middot; {lastRefresh}</span>}
+              Holdings: {holdingsData.lastUpdated} &middot; CAD/USD: {fxRate.toFixed(4)}
+              {lastRefresh && <> &middot; Prices: {lastRefresh}</>}
             </p>
           </div>
           <button
