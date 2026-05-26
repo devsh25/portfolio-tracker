@@ -1,24 +1,31 @@
 {
-  "lastUpdated": "2026-05-02",
-  "notes": "Updated May 2, 2026 from Latest Values folder. Quest values from April 30 screenshots. Bank cash from April 30 statements/screenshots. Crypto unchanged (Ledger CSV April 16). Dev added 13.22 META to Cash account.",
+  "lastUpdated": "2026-05-26",
+  "notes": "Updated May 26, 2026 from latest mobile screenshots. New platforms: Wealthsimple (Dev: Non-Reg cash, TFSA, RRSP) and EQ Bank (Dev + Shalini). Vegrow swapped CASH.TO for NVDA.TO (350 shares) and added ZID.TO. Dev META consolidated into RRSP. Shalini TFSA added NFLX + TSLA. Bank balances substantially down (Blockwiz Scotia, Seglitix BMO, Dev Scotia, Shalini Scotia, Vegrow BMO, Blockwiz Wise → 0). Quest cash all zero per user. Crypto + real estate unchanged.",
   "owners": {
     "Dev": {
       "questrade": {
-        "RRSP": {
+        "Quest RRSP": {
           "GOOG": 61.7291,
-          "META": 5,
+          "META": 18.2193,
           "MSFT": 8,
           "NFLX": 110,
           "TSLA": 37
         },
-        "TFSA": {
+        "Quest TFSA": {
           "VFV.TO": 213,
-          "ZID.TO": 271
+          "ZID.TO": 271,
+          "TSLA": 0.4959
         },
-        "Cash": {
+        "Quest Cash": {
           "VFV.TO": 2039,
-          "MSFT": 52.0339,
-          "META": 13.2193
+          "MSFT": 52.0339
+        },
+        "WS TFSA": {
+          "META": 20.6009,
+          "NVDA": 25.6823
+        },
+        "WS RRSP": {
+          "NVDA": 21.5574
         }
       },
       "crypto": {
@@ -42,48 +49,52 @@
       "cash": {
         "USDC (Ledger)": 48994.46,
         "USDT (Ledger)": 55.73,
-        "Questrade": 395.91,
-        "Dev Scotia": 5707.29,
-        "Blockwiz Scotia": 28981.66,
-        "Blockwiz Wise": 4212.86,
-        "Seglitix BMO": 15375.36,
-        "Blockwiz BMO": 2474.70
+        "Dev Scotia": 1677.48,
+        "Blockwiz Scotia": 6991.44,
+        "Blockwiz Wise": 0,
+        "Seglitix BMO": 178.88,
+        "Blockwiz BMO": 2474.70,
+        "EQ Bank Dev (CAD)": 582.90,
+        "EQ Bank Dev (USD)": 0.69,
+        "WS Cash (CAD)": 8.76,
+        "WS Cash (USD)": 11625.06
       }
     },
     "Shalini": {
       "questrade": {
-        "RRSP": {
+        "Quest RRSP": {
           "GOOG": 37.5969,
           "MSFT": 15.0213,
           "TSLA": 63
         },
-        "TFSA": {
+        "Quest TFSA": {
           "VFV.TO": 293,
-          "ZID.TO": 16
+          "ZID.TO": 16,
+          "NFLX": 84.3293,
+          "TSLA": 16.1947
         },
-        "Cash": {
+        "Quest Cash": {
           "VFV.TO": 577,
-          "ZID.TO": 399
+          "ZID.TO": 403
         }
       },
       "crypto": {},
       "cash": {
-        "Questrade": 568.00,
-        "Shalini Scotia": 4711.35
+        "Shalini Scotia": 3367.68,
+        "EQ Bank Shalini": 6008.94
       }
     },
     "Vegrow": {
       "questrade": {
-        "Cash": {
-          "ZID.TO": 1119,
-          "CASH.TO": 499,
-          "VFV.TO": 134
+        "Quest Cash": {
+          "ZID.TO": 1308,
+          "VFV.TO": 134,
+          "NVDA.TO": 350
         }
       },
       "crypto": {},
       "cash": {
-        "Questrade": 188.68,
-        "Vegrow BMO": 13581.47
+        "Vegrow BMO": 8581.47
       }
     }
   },
@@ -93,6 +104,8 @@
     "MSFT": { "name": "Microsoft Corp", "currency": "USD", "yahoo": "MSFT" },
     "NFLX": { "name": "Netflix Inc", "currency": "USD", "yahoo": "NFLX" },
     "TSLA": { "name": "Tesla Inc", "currency": "USD", "yahoo": "TSLA" },
+    "NVDA": { "name": "NVIDIA Corp", "currency": "USD", "yahoo": "NVDA" },
+    "NVDA.TO": { "name": "NVIDIA CDR (CAD Hedged)", "currency": "CAD", "yahoo": "NVDA.TO" },
     "VFV.TO": { "name": "Vanguard S&P 500 ETF", "currency": "CAD", "yahoo": "VFV.TO" },
     "ZID.TO": { "name": "BMO MSCI India ETF", "currency": "CAD", "yahoo": "ZID.TO" },
     "CASH.TO": { "name": "Global X High Interest Savings ETF", "currency": "CAD", "yahoo": "CASH.TO" },
@@ -111,14 +124,18 @@
   "cashCurrencies": {
     "USDC (Ledger)": "USD",
     "USDT (Ledger)": "USD",
-    "Questrade": "CAD",
     "Dev Scotia": "CAD",
     "Shalini Scotia": "CAD",
     "Blockwiz Scotia": "CAD",
     "Blockwiz Wise": "CAD",
     "Seglitix BMO": "CAD",
     "Blockwiz BMO": "CAD",
-    "Vegrow BMO": "CAD"
+    "Vegrow BMO": "CAD",
+    "EQ Bank Dev (CAD)": "CAD",
+    "EQ Bank Dev (USD)": "USD",
+    "EQ Bank Shalini": "CAD",
+    "WS Cash (CAD)": "CAD",
+    "WS Cash (USD)": "USD"
   },
   "realEstate": {
     "Ireo Grand Arch": {
@@ -141,8 +158,7 @@
     "Seglitix BMO": "Seglitix",
     "Vegrow BMO": "Vegrow",
     "Dev Scotia": "Dev",
-    "Shalini Scotia": "Shalini",
-    "Questrade": "same"
+    "Shalini Scotia": "Shalini"
   },
   "cryptoEntityMapping": {
     "Ledger": ["Dev"],
@@ -156,6 +172,8 @@
     "MSFT": "USA",
     "NFLX": "USA",
     "TSLA": "USA",
+    "NVDA": "USA",
+    "NVDA.TO": "USA",
     "VFV.TO": "USA",
     "CASH.TO": "Canada",
     "BTC": "Global",
