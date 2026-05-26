@@ -26,7 +26,7 @@ export function buildPortfolio(holdings: HoldingsData, prices: PriceData, fxRate
         rows.push({
           owner: ownerName,
           asset: ticker,
-          account: `Quest ${acctType}`,
+          account: acctType,
           accountType: "questrade",
           qty,
           valueUSD,
