@@ -2217,5 +2217,12 @@
     "liquidUSD": 1202081,
     "fxRate": 1.4159,
     "source": "live"
+  },
+  {
+    "timestamp": "2026-06-23T15:44:17.376Z",
+    "liquidCAD": 1675743,
+    "liquidUSD": 1179935,
+    "fxRate": 1.4202,
+    "source": "live"
   }
 ]
