@@ -1,31 +1,28 @@
 {
-  "lastUpdated": "2026-05-26",
-  "notes": "Updated May 26, 2026 from latest mobile screenshots. New platforms: Wealthsimple (Dev: Non-Reg cash, TFSA, RRSP) and EQ Bank (Dev + Shalini). Vegrow swapped CASH.TO for NVDA.TO (350 shares) and added ZID.TO. Dev META consolidated into RRSP. Shalini TFSA added NFLX + TSLA. Bank balances substantially down (Blockwiz Scotia, Seglitix BMO, Dev Scotia, Shalini Scotia, Vegrow BMO, Blockwiz Wise → 0). Quest cash all zero per user. Crypto + real estate unchanged.",
+  "lastUpdated": "2026-06-28",
+  "notes": "Updated June 28, 2026. Major change: Dev + Shalini in-kind transferred ALL Questrade holdings to Wealthsimple (fractional shares sold pre-transfer). New WS Chequing accounts opened for both. Dev WS also gained new positions in GOOG/META/MSFT from deploying transferred USD cash into Non-Reg. Vegrow Questrade stays at Questrade unchanged (ZID 1308, VFV 134, NVDA.TO 350). Bank balances refreshed; Blockwiz Wise $0. Crypto + real estate unchanged.",
   "owners": {
     "Dev": {
       "questrade": {
-        "Quest RRSP": {
-          "GOOG": 61.7291,
-          "META": 18.2193,
+        "WS RRSP": {
+          "GOOG": 61,
+          "META": 18.0173,
           "MSFT": 8,
           "NFLX": 110,
+          "NVDA": 21.5851,
           "TSLA": 37
         },
-        "Quest TFSA": {
-          "VFV.TO": 213,
-          "ZID.TO": 271,
-          "TSLA": 0.4959
-        },
-        "Quest Cash": {
-          "VFV.TO": 2039,
-          "MSFT": 52.0339
-        },
         "WS TFSA": {
-          "META": 20.6009,
-          "NVDA": 25.6823
+          "META": 20.6177,
+          "NVDA": 25.7104,
+          "VFV.TO": 213,
+          "ZID.TO": 271
         },
-        "WS RRSP": {
-          "NVDA": 21.5574
+        "WS Non-Reg": {
+          "GOOG": 15,
+          "META": 9.4063,
+          "MSFT": 67,
+          "VFV.TO": 2039
         }
       },
       "crypto": {
@@ -49,39 +46,42 @@
       "cash": {
         "USDC (Ledger)": 48994.46,
         "USDT (Ledger)": 55.73,
-        "Dev Scotia": 1677.48,
-        "Blockwiz Scotia": 6991.44,
+        "Dev Scotia": 77.91,
+        "Blockwiz Scotia": 6976.14,
         "Blockwiz Wise": 0,
-        "Seglitix BMO": 178.88,
+        "Seglitix BMO": 2953.95,
         "Blockwiz BMO": 2474.70,
-        "EQ Bank Dev (CAD)": 582.90,
+        "EQ Bank Dev (CAD)": 583.13,
         "EQ Bank Dev (USD)": 0.69,
-        "WS Cash (CAD)": 8.76,
-        "WS Cash (USD)": 11625.06
+        "WS Chequing": 678,
+        "WS Non-Reg Cash (CAD)": 62,
+        "WS Non-Reg Cash (USD)": 4793
       }
     },
     "Shalini": {
       "questrade": {
-        "Quest RRSP": {
-          "GOOG": 37.5969,
-          "MSFT": 15.0213,
+        "WS RRSP": {
+          "GOOG": 37,
+          "MSFT": 15,
           "TSLA": 63
         },
-        "Quest TFSA": {
+        "WS TFSA": {
+          "NFLX": 84,
+          "TSLA": 16,
           "VFV.TO": 293,
-          "ZID.TO": 16,
-          "NFLX": 84.3293,
-          "TSLA": 16.1947
+          "ZID.TO": 16
         },
-        "Quest Cash": {
+        "WS Non-Reg": {
           "VFV.TO": 577,
           "ZID.TO": 403
         }
       },
       "crypto": {},
       "cash": {
-        "Shalini Scotia": 3367.68,
-        "EQ Bank Shalini": 6008.94
+        "Shalini Scotia": 2901.51,
+        "EQ Bank Shalini": 5010.41,
+        "WS Chequing": 1975,
+        "WS Non-Reg Cash (CAD)": 60
       }
     },
     "Vegrow": {
@@ -94,7 +94,8 @@
       },
       "crypto": {},
       "cash": {
-        "Vegrow BMO": 8581.47
+        "Vegrow BMO": 8581.47,
+        "Vegrow Questrade": 26
       }
     }
   },
@@ -131,11 +132,13 @@
     "Seglitix BMO": "CAD",
     "Blockwiz BMO": "CAD",
     "Vegrow BMO": "CAD",
+    "Vegrow Questrade": "CAD",
     "EQ Bank Dev (CAD)": "CAD",
     "EQ Bank Dev (USD)": "USD",
     "EQ Bank Shalini": "CAD",
-    "WS Cash (CAD)": "CAD",
-    "WS Cash (USD)": "USD"
+    "WS Chequing": "CAD",
+    "WS Non-Reg Cash (CAD)": "CAD",
+    "WS Non-Reg Cash (USD)": "USD"
   },
   "realEstate": {
     "Ireo Grand Arch": {
