@@ -40,9 +40,30 @@ function aggregate(snaps: Snapshot[], g: Granularity): { bucket: string; value: 
     .sort((a, b) => a.bucket.localeCompare(b.bucket));
 }
 
+type RefreshState = "idle" | "loading" | "success" | "error";
+
 export default function LiquidGrowth() {
   const [granularity, setGranularity] = useState<Granularity>("day");
+  const [refreshState, setRefreshState] = useState<RefreshState>("idle");
+  const [refreshMsg, setRefreshMsg] = useState<string>("");
   const raw = snapshots as Snapshot[];
+
+  async function handleRefresh() {
+    setRefreshState("loading");
+    setRefreshMsg("Dispatching workflow…");
+    try {
+      const res = await fetch("/api/refresh-snapshot", { method: "POST" });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({ error: res.statusText }));
+        throw new Error(err.error || "Failed");
+      }
+      setRefreshState("success");
+      setRefreshMsg("Triggered ✓ — chart will update in ~1–2 min once the workflow + Vercel finish.");
+    } catch (e) {
+      setRefreshState("error");
+      setRefreshMsg(e instanceof Error ? e.message : "Failed to dispatch");
+    }
+  }
 
   const { merged, backfillStats, liveStats } = useMemo(() => {
     const backfill = raw.filter((s) => s.source === "backfill");
@@ -98,21 +119,50 @@ export default function LiquidGrowth() {
           </p>
         </div>
 
-        <div className="flex items-center gap-1 rounded-lg bg-neutral-950/60 border border-neutral-800 p-0.5">
-          {(["day", "week", "month"] as Granularity[]).map((g) => (
-            <button
-              key={g}
-              type="button"
-              onClick={() => setGranularity(g)}
-              className={`px-3 py-1 text-xs font-semibold rounded-md transition-colors ${
-                granularity === g ? "bg-neutral-700 text-white" : "text-neutral-400 hover:text-neutral-200"
-              }`}
-            >
-              {g === "day" ? "Daily" : g === "week" ? "Weekly" : "Monthly"}
-            </button>
-          ))}
+        <div className="flex items-center gap-2 flex-wrap">
+          <button
+            type="button"
+            onClick={handleRefresh}
+            disabled={refreshState === "loading"}
+            className={`px-3 py-1.5 text-xs font-semibold rounded-md border transition-colors flex items-center gap-1.5 ${
+              refreshState === "loading"
+                ? "bg-neutral-800 border-neutral-700 text-neutral-500 cursor-wait"
+                : refreshState === "success"
+                ? "bg-emerald-500/10 border-emerald-500/40 text-emerald-300"
+                : refreshState === "error"
+                ? "bg-red-500/10 border-red-500/40 text-red-300"
+                : "bg-neutral-800 border-neutral-700 text-neutral-200 hover:bg-neutral-700"
+            }`}
+            title="Trigger the snapshot workflow now"
+          >
+            <svg className={`w-3 h-3 ${refreshState === "loading" ? "animate-spin" : ""}`} viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M15.312 11.424a5.5 5.5 0 01-9.201 2.466l-.312-.311h2.433a.75.75 0 000-1.5H3.989a.75.75 0 00-.75.75v4.242a.75.75 0 001.5 0v-2.43l.31.31a7 7 0 0011.712-3.138.75.75 0 00-1.449-.39zm1.23-3.723a.75.75 0 00.219-.53V2.929a.75.75 0 00-1.5 0V5.36l-.31-.31A7 7 0 003.239 8.188a.75.75 0 101.448.389A5.5 5.5 0 0113.89 6.11l.311.31h-2.432a.75.75 0 000 1.5h4.243a.75.75 0 00.53-.219z" clipRule="evenodd" />
+            </svg>
+            {refreshState === "loading" ? "Refreshing…" : "Refresh now"}
+          </button>
+
+          <div className="flex items-center gap-1 rounded-lg bg-neutral-950/60 border border-neutral-800 p-0.5">
+            {(["day", "week", "month"] as Granularity[]).map((g) => (
+              <button
+                key={g}
+                type="button"
+                onClick={() => setGranularity(g)}
+                className={`px-3 py-1 text-xs font-semibold rounded-md transition-colors ${
+                  granularity === g ? "bg-neutral-700 text-white" : "text-neutral-400 hover:text-neutral-200"
+                }`}
+              >
+                {g === "day" ? "Daily" : g === "week" ? "Weekly" : "Monthly"}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
+
+      {refreshMsg && refreshState !== "idle" && (
+        <div className={`text-xs mb-3 ${refreshState === "error" ? "text-red-400" : refreshState === "success" ? "text-emerald-400" : "text-neutral-400"}`}>
+          {refreshMsg}
+        </div>
+      )}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
         {backfillStats && (
