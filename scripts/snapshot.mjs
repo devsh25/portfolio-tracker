@@ -7,8 +7,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const file = path.join(__dirname, "..", "data", "snapshots.json");
 const BACKFILL_START = new Date("2026-01-01T12:00:00Z");
 
-async function backfill() {
-  console.log("Empty snapshots — running one-time backfill from 2026-01-01");
+async function regenBackfill() {
   const end = new Date();
   const hist = await fetchHistorical(BACKFILL_START, end);
   const tickers = Object.keys(hist);
@@ -27,27 +26,31 @@ async function backfill() {
     const snap = makeSnapshot(prices, "backfill", stamp);
     if (snap) snapshots.push(snap);
   }
-
-  fs.writeFileSync(file, JSON.stringify(snapshots, null, 2) + "\n");
-  console.log(`Backfilled ${snapshots.length} daily snapshots`);
+  return snapshots;
 }
 
-async function appendLive() {
-  const existing = JSON.parse(fs.readFileSync(file, "utf8"));
+async function liveSnap() {
   const prices = await fetchLatest();
-  const snap = makeSnapshot(prices, "live");
-  if (!snap) {
-    console.error("Live fetch incomplete — skipping append");
-    process.exit(1);
-  }
-  existing.push(snap);
-  fs.writeFileSync(file, JSON.stringify(existing, null, 2) + "\n");
-  console.log(`Appended: ${snap.timestamp} liquidCAD=${snap.liquidCAD}`);
+  return makeSnapshot(prices, "live");
 }
 
 const current = fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, "utf8")) : [];
-if (current.length === 0) {
-  await backfill();
-} else {
-  await appendLive();
+const existingLive = current.filter((s) => s.source === "live");
+
+const [backfillRes, liveRes] = await Promise.allSettled([regenBackfill(), liveSnap()]);
+
+const backfill = backfillRes.status === "fulfilled"
+  ? backfillRes.value
+  : (console.error("Backfill failed:", backfillRes.reason?.message), current.filter((s) => s.source === "backfill"));
+
+const liveSnaps = [...existingLive];
+if (liveRes.status === "fulfilled" && liveRes.value) {
+  liveSnaps.push(liveRes.value);
+  console.log(`Live append: ${liveRes.value.timestamp} liquidCAD=${liveRes.value.liquidCAD}`);
+} else if (liveRes.status === "rejected") {
+  console.error("Live fetch failed:", liveRes.reason?.message);
 }
+
+const combined = [...backfill, ...liveSnaps];
+fs.writeFileSync(file, JSON.stringify(combined, null, 2) + "\n");
+console.log(`Saved ${backfill.length} backfill + ${liveSnaps.length} live snapshots`);
