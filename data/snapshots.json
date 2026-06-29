@@ -1247,9 +1247,9 @@
   },
   {
     "timestamp": "2026-06-30T05:00:00.000Z",
-    "liquidCAD": 1667836,
-    "liquidUSD": 1174342,
-    "fxRate": 1.4202,
+    "liquidCAD": 1678992,
+    "liquidUSD": 1182164,
+    "fxRate": 1.4203,
     "source": "backfill"
   },
   {
@@ -2493,16 +2493,16 @@
   },
   {
     "timestamp": "2026-06-30T05:00:00.000Z",
-    "liquidCAD": 1668365,
-    "liquidUSD": 1174715,
-    "fxRate": 1.4202,
+    "liquidCAD": 1678568,
+    "liquidUSD": 1181865,
+    "fxRate": 1.4203,
     "source": "live"
   },
   {
-    "timestamp": "2026-06-29T16:36:05.335Z",
-    "liquidCAD": 1667716,
-    "liquidUSD": 1174282,
-    "fxRate": 1.4202,
+    "timestamp": "2026-06-29T19:01:32.077Z",
+    "liquidCAD": 1679012,
+    "liquidUSD": 1182153,
+    "fxRate": 1.4203,
     "source": "live"
   }
 ]
