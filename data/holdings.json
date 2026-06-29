@@ -1,6 +1,6 @@
 {
   "lastUpdated": "2026-06-28",
-  "notes": "Updated June 28, 2026. Major change: Dev + Shalini in-kind transferred ALL Questrade holdings to Wealthsimple (fractional shares sold pre-transfer). New WS Chequing accounts opened for both. Dev WS also gained new positions in GOOG/META/MSFT from deploying transferred USD cash into Non-Reg. Vegrow Questrade stays at Questrade unchanged (ZID 1308, VFV 134, NVDA.TO 350). Bank balances refreshed; Blockwiz Wise $0. Crypto + real estate unchanged.",
+  "notes": "Updated June 28, 2026 (PM). Crypto rebalance: sold $32k USDC \u2192 BTC +0.20604, ETH +7.53217, SOL +102.34. Earlier on Jun 28: Dev + Shalini in-kind transferred all Questrade holdings to Wealthsimple (fractional shares sold pre-transfer); opened WS Chequing; Dev WS Non-Reg also gained new positions from deploying transferred USD cash. Vegrow Questrade stays unchanged. Bank balances refreshed; Blockwiz Wise $0. Real estate unchanged.",
   "owners": {
     "Dev": {
       "questrade": {
@@ -27,9 +27,9 @@
       },
       "crypto": {
         "Ledger": {
-          "BTC": 4.9485,
-          "ETH": 38.547,
-          "SOL": 84.894,
+          "BTC": 5.15454,
+          "ETH": 46.07917,
+          "SOL": 187.234,
           "XRP": 369.5,
           "LTC": 2.62,
           "MANA": 2222.76,
@@ -44,13 +44,13 @@
         }
       },
       "cash": {
-        "USDC (Ledger)": 48994.46,
+        "USDC (Ledger)": 16994.46,
         "USDT (Ledger)": 55.73,
         "Dev Scotia": 77.91,
         "Blockwiz Scotia": 6976.14,
         "Blockwiz Wise": 0,
         "Seglitix BMO": 2953.95,
-        "Blockwiz BMO": 2474.70,
+        "Blockwiz BMO": 2474.7,
         "EQ Bank Dev (CAD)": 583.13,
         "EQ Bank Dev (USD)": 0.69,
         "WS Chequing": 678,
@@ -100,28 +100,110 @@
     }
   },
   "tickerMeta": {
-    "GOOG": { "name": "Alphabet Inc", "currency": "USD", "yahoo": "GOOG" },
-    "META": { "name": "Meta Platforms", "currency": "USD", "yahoo": "META" },
-    "MSFT": { "name": "Microsoft Corp", "currency": "USD", "yahoo": "MSFT" },
-    "NFLX": { "name": "Netflix Inc", "currency": "USD", "yahoo": "NFLX" },
-    "TSLA": { "name": "Tesla Inc", "currency": "USD", "yahoo": "TSLA" },
-    "NVDA": { "name": "NVIDIA Corp", "currency": "USD", "yahoo": "NVDA" },
-    "NVDA.TO": { "name": "NVIDIA CDR (CAD Hedged)", "currency": "CAD", "yahoo": "NVDA.TO" },
-    "VFV.TO": { "name": "Vanguard S&P 500 ETF", "currency": "CAD", "yahoo": "VFV.TO" },
-    "ZID.TO": { "name": "BMO MSCI India ETF", "currency": "CAD", "yahoo": "ZID.TO" },
-    "CASH.TO": { "name": "Global X High Interest Savings ETF", "currency": "CAD", "yahoo": "CASH.TO" },
-    "BTC": { "name": "Bitcoin", "currency": "USD", "yahoo": "BTC-USD" },
-    "ETH": { "name": "Ethereum", "currency": "USD", "yahoo": "ETH-USD" },
-    "SOL": { "name": "Solana", "currency": "USD", "yahoo": "SOL-USD" },
-    "XRP": { "name": "XRP", "currency": "USD", "yahoo": "XRP-USD" },
-    "BNB": { "name": "BNB", "currency": "USD", "yahoo": "BNB-USD" },
-    "LTC": { "name": "Litecoin", "currency": "USD", "yahoo": "LTC-USD" },
-    "TRX": { "name": "TRON", "currency": "USD", "yahoo": "TRX-USD" },
-    "MANA": { "name": "Decentraland", "currency": "USD", "yahoo": "MANA-USD" },
-    "SAND": { "name": "The Sandbox", "currency": "USD", "yahoo": "SAND-USD" },
-    "GOLD": { "name": "Gold (per oz)", "currency": "USD", "yahoo": "GC=F" }
+    "GOOG": {
+      "name": "Alphabet Inc",
+      "currency": "USD",
+      "yahoo": "GOOG"
+    },
+    "META": {
+      "name": "Meta Platforms",
+      "currency": "USD",
+      "yahoo": "META"
+    },
+    "MSFT": {
+      "name": "Microsoft Corp",
+      "currency": "USD",
+      "yahoo": "MSFT"
+    },
+    "NFLX": {
+      "name": "Netflix Inc",
+      "currency": "USD",
+      "yahoo": "NFLX"
+    },
+    "TSLA": {
+      "name": "Tesla Inc",
+      "currency": "USD",
+      "yahoo": "TSLA"
+    },
+    "NVDA": {
+      "name": "NVIDIA Corp",
+      "currency": "USD",
+      "yahoo": "NVDA"
+    },
+    "NVDA.TO": {
+      "name": "NVIDIA CDR (CAD Hedged)",
+      "currency": "CAD",
+      "yahoo": "NVDA.TO"
+    },
+    "VFV.TO": {
+      "name": "Vanguard S&P 500 ETF",
+      "currency": "CAD",
+      "yahoo": "VFV.TO"
+    },
+    "ZID.TO": {
+      "name": "BMO MSCI India ETF",
+      "currency": "CAD",
+      "yahoo": "ZID.TO"
+    },
+    "CASH.TO": {
+      "name": "Global X High Interest Savings ETF",
+      "currency": "CAD",
+      "yahoo": "CASH.TO"
+    },
+    "BTC": {
+      "name": "Bitcoin",
+      "currency": "USD",
+      "yahoo": "BTC-USD"
+    },
+    "ETH": {
+      "name": "Ethereum",
+      "currency": "USD",
+      "yahoo": "ETH-USD"
+    },
+    "SOL": {
+      "name": "Solana",
+      "currency": "USD",
+      "yahoo": "SOL-USD"
+    },
+    "XRP": {
+      "name": "XRP",
+      "currency": "USD",
+      "yahoo": "XRP-USD"
+    },
+    "BNB": {
+      "name": "BNB",
+      "currency": "USD",
+      "yahoo": "BNB-USD"
+    },
+    "LTC": {
+      "name": "Litecoin",
+      "currency": "USD",
+      "yahoo": "LTC-USD"
+    },
+    "TRX": {
+      "name": "TRON",
+      "currency": "USD",
+      "yahoo": "TRX-USD"
+    },
+    "MANA": {
+      "name": "Decentraland",
+      "currency": "USD",
+      "yahoo": "MANA-USD"
+    },
+    "SAND": {
+      "name": "The Sandbox",
+      "currency": "USD",
+      "yahoo": "SAND-USD"
+    },
+    "GOLD": {
+      "name": "Gold (per oz)",
+      "currency": "USD",
+      "yahoo": "GC=F"
+    }
   },
-  "watchlist": ["GOLD"],
+  "watchlist": [
+    "GOLD"
+  ],
   "cashCurrencies": {
     "USDC (Ledger)": "USD",
     "USDT (Ledger)": "USD",
@@ -145,13 +227,19 @@
       "value": 53500000,
       "currency": "INR",
       "country": "India",
-      "owners": ["Dev", "Shalini"]
+      "owners": [
+        "Dev",
+        "Shalini"
+      ]
     },
     "Garvin Mews": {
       "value": 1100000,
       "currency": "CAD",
       "country": "Canada",
-      "owners": ["Dev", "Shalini"]
+      "owners": [
+        "Dev",
+        "Shalini"
+      ]
     }
   },
   "entityMapping": {
@@ -164,9 +252,15 @@
     "Shalini Scotia": "Shalini"
   },
   "cryptoEntityMapping": {
-    "Ledger": ["Dev"],
-    "Coinbase": ["Dev"],
-    "Binance": ["Dev"]
+    "Ledger": [
+      "Dev"
+    ],
+    "Coinbase": [
+      "Dev"
+    ],
+    "Binance": [
+      "Dev"
+    ]
   },
   "countryMapping": {
     "ZID.TO": "India",
